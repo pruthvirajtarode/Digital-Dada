@@ -16,6 +16,9 @@ import { CtaSection } from "@/components/home/CtaSection";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      <div className="fixed top-4 left-4 z-[9999] px-2 py-1 bg-green-500 text-black text-xs font-bold rounded">
+        v2.0 LIVE - CACHE CLEARED
+      </div>
       <HomeHero />
       <ProblemSection />
       <ProductShowcase />
