@@ -1,85 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Headline } from "@/components/typography/Headline";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
+import { useRef } from "react";
 
 export function HomeHero() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const rotateImage = useTransform(scrollYProgress, [0, 1], [0, 15]);
+  const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
-      {/* Abstract Background Node Visualization */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-end overflow-hidden right-[-20%]">
-        <motion.div
-          animate={{ rotate: 360, scale: [1, 1.05, 1] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="w-[800px] h-[800px] border-2 border-white/20 rounded-full border-dashed opacity-40"
-        />
-        <motion.div
-          animate={{ rotate: -360, scale: [1, 1.1, 1] }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[600px] h-[600px] border border-dada-accent/30 rounded-full opacity-60"
-        />
-        <div className="absolute w-[800px] h-[800px] bg-dada-accent/10 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-8 flex flex-col items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-dada-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-dada-accent"></span>
-              </span>
-              <span className="text-xs font-bold tracking-widest uppercase text-dada-accent">
-                Dada Signal Active
-              </span>
-            </div>
-          </motion.div>
-
-          <Headline
-            text="Build Your AI Workforce."
-            as="h1"
-            className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9] mb-8"
-          />
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl md:text-2xl text-dada-off-white/80 max-w-2xl leading-relaxed mb-6"
-          >
-            AI employees that handle the repetitive work inside your accounting firm—so your people can focus on the work that actually requires people.
-          </motion.p>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-base text-dada-off-white/60 max-w-2xl mb-12"
-          >
-            Digital Dada builds, deploys, and manages intelligent AI systems that can collect documents, pursue unpaid invoices, document processes, analyze workflows, and help executives make better decisions.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center gap-6"
-          >
-            <Button href="/contact" size="lg" withArrow>
-              See What Your Firm Can Automate
-            </Button>
-            <span className="text-sm text-dada-off-white/40">
-              Built for accounting firms. Powered by Dada AI.
-            </span>
-          </motion.div>
+    <section ref={containerRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-dada-black pt-20">
+      
+      {/* 3D Floating Object */}
+      <motion.div 
+        style={{ y: yImage, rotate: rotateImage, scale: scaleImage }}
+        className="absolute inset-0 z-10 flex items-center justify-center lg:justify-end lg:pr-32 pointer-events-none opacity-80"
+      >
+        <div className="relative w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] max-w-[800px] max-h-[800px]">
+           <Image 
+             src="/hero-object.png" 
+             alt="Abstract AI Core" 
+             fill 
+             className="object-contain drop-shadow-2xl mix-blend-screen"
+             priority
+           />
         </div>
+      </motion.div>
+
+      {/* Massive Typography Layer */}
+      <div className="relative z-20 w-full max-w-[100vw] px-6 text-center lg:text-left lg:pl-16 pointer-events-none mix-blend-difference">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col uppercase font-bold tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
+        >
+          <span className="block text-left">BUILD</span>
+          <span className="block text-center md:text-left md:pl-[20vw]">YOUR AI</span>
+          <span className="block text-right lg:text-left lg:pl-[5vw] text-dada-accent">WORKFORCE.</span>
+        </motion.div>
       </div>
+
+      {/* Interactive Elements / Descriptions */}
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-6 mt-16 lg:mt-24 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="max-w-xl"
+        >
+          <p className="text-xl md:text-2xl text-dada-off-white/80 leading-relaxed mb-6 font-light">
+            AI employees that handle the repetitive work inside your accounting firm—so your people can focus on the work that actually requires people.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-col items-start lg:items-end gap-6"
+        >
+          <Button href="/contact" size="lg" withArrow>
+            See What Your Firm Can Automate
+          </Button>
+          <span className="text-sm text-dada-off-white/40 font-mono tracking-widest uppercase">
+            Dada Signal Active
+          </span>
+        </motion.div>
+      </div>
+
     </section>
   );
 }
