@@ -1,7 +1,8 @@
-const puppeteer = require('puppeteer');
+const { chromium } = require('playwright');
 
 (async () => {
-  const browser = await puppeteer.launch();
+  console.log('Launching browser...');
+  const browser = await chromium.launch();
   const page = await browser.newPage();
   
   page.on('console', msg => {
@@ -15,12 +16,14 @@ const puppeteer = require('puppeteer');
   });
 
   try {
-    await page.goto('http://localhost:3000', { waitUntil: 'networkidle0' });
-    console.log('Page loaded successfully.');
+    console.log('Navigating...');
+    await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+    console.log('Navigation complete. Waiting 2 seconds...');
+    await page.waitForTimeout(2000);
   } catch (e) {
     console.log('Navigation failed:', e.message);
   }
 
   await browser.close();
-  process.exit(0);
+  console.log('Done.');
 })();
