@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-dada-black: #0a0a0a;
+  --color-dada-near-black: #141414;
+  --color-dada-dark-gray: #242424;
+  --color-dada-gray: #888888;
+  --color-dada-off-white: #f4f4f4;
+  --color-dada-warm-white: #fcfcfc;
+  --color-dada-accent: #ccff00;
+
+  --color-background: var(--color-dada-black);
+  --color-foreground: var(--color-dada-warm-white);
+  
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #fcfcfc;
+}
+
+@media (prefers-color-scheme: light) {
+  /* We will force dark mode for this premium website as per the prompt's implied aesthetics
+     but we leave the root defined just in case */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-dada-accent);
+  color: var(--color-dada-black);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+}
