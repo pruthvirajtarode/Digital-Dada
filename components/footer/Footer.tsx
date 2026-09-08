@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 const footerLinks = [
@@ -20,11 +21,14 @@ export function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
         
         <div className="max-w-md">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6 group">
-            <div className="w-5 h-5 bg-dada-accent rounded-sm" />
-            <span className="font-bold text-2xl tracking-tight uppercase group-hover:text-dada-accent transition-colors">
-              Digital Dada
-            </span>
+          <Link href="/" className="inline-flex items-center mb-6 group">
+            <Image 
+              src="/logo.png" 
+              alt="Digital Dada" 
+              width={200} 
+              height={50} 
+              className="object-contain invert brightness-0 opacity-80 group-hover:opacity-100 transition-opacity"
+            />
           </Link>
           <h3 className="text-xl font-medium mb-4">
             The AI Workforce for Accounting Firms

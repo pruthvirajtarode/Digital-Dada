@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -45,11 +46,15 @@ export function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="group flex items-center gap-2 z-50 relative">
-            <div className="w-4 h-4 bg-dada-accent rounded-sm" />
-            <span className="font-bold text-lg tracking-tight uppercase group-hover:text-dada-accent transition-colors">
-              Digital Dada
-            </span>
+          <Link href="/" className="group flex items-center z-50 relative">
+            <Image 
+              src="/logo.png" 
+              alt="Digital Dada" 
+              width={160} 
+              height={40} 
+              className="object-contain invert brightness-0 opacity-90 group-hover:opacity-100 transition-opacity"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
