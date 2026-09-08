@@ -26,47 +26,53 @@ export function HowItWorks() {
   return (
     <section ref={containerRef} className="py-32 bg-dada-black relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-3xl mb-24">
-          <Reveal>
-            <Headline text="Don’t Automate Randomly. Automate Intelligently." as="h2" className="text-4xl md:text-6xl font-bold mb-8" />
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="text-xl text-dada-off-white/80 leading-relaxed">
-              Most companies approach AI backwards.<br/>
-              They find an AI tool and then try to figure out where it fits.<br/>
-              <span className="text-dada-accent font-bold mt-4 block">We start with the work.</span>
-            </p>
-          </Reveal>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-end relative z-10">
+          <div className="lg:col-span-7">
+            <Reveal>
+              <Headline text="Don’t Automate Randomly." as="h2" className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-2" />
+            </Reveal>
+            <Reveal delay={0.1}>
+              <Headline text="Automate Intelligently." as="h2" className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-dada-accent" />
+            </Reveal>
+          </div>
+          <div className="lg:col-span-5 lg:pl-12 lg:border-l border-white/10 pb-4">
+            <Reveal delay={0.3}>
+              <p className="text-xl md:text-2xl text-dada-off-white/80 leading-relaxed font-light">
+                Most companies approach AI backwards. They find an AI tool and then try to figure out where it fits.
+                <span className="text-white font-bold mt-6 block text-2xl">We start with the work.</span>
+              </p>
+            </Reveal>
+          </div>
         </div>
 
-        <div className="relative pl-8 md:pl-16">
+        <div className="relative pl-8 md:pl-24">
           {/* Animated vertical line */}
-          <div className="absolute left-[15px] md:left-[31px] top-4 bottom-4 w-[2px] bg-white/10">
+          <div className="absolute left-[15px] md:left-[31px] top-4 bottom-4 w-[2px] bg-white/5">
             <motion.div style={{ height: lineHeight }} className="w-full bg-dada-accent origin-top" />
           </div>
 
-          <div className="flex flex-col gap-16 md:gap-24 relative">
+          <div className="flex flex-col gap-24 relative">
             {steps.map((step, i) => (
               <Reveal key={step.num} delay={i * 0.1}>
-                <div className="relative">
+                <div className="relative group">
                   {/* Node indicator */}
-                  <div className="absolute -left-[45px] md:-left-[61px] top-2 w-4 h-4 rounded-full bg-dada-black border-2 border-white/20 z-10 flex items-center justify-center">
+                  <div className="absolute -left-[45px] md:-left-[85px] top-4 w-4 h-4 rounded-full bg-dada-black border-2 border-white/20 z-10 flex items-center justify-center group-hover:border-dada-accent transition-colors">
                     <motion.div 
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      viewport={{ once: true, margin: "0px" }}
                       transition={{ delay: 0.3 + (i * 0.1) }}
                       className="w-2 h-2 rounded-full bg-dada-accent"
                     />
                   </div>
                   
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-baseline">
-                    <div className="flex gap-4 md:w-1/3 items-baseline">
-                      <span className="text-dada-accent font-mono text-xl">{step.num}</span>
-                      <h3 className="text-2xl md:text-3xl font-bold tracking-tight">— {step.title}</h3>
+                  <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start">
+                    <div className="flex flex-col gap-2 lg:w-5/12">
+                      <span className="text-dada-accent font-mono text-sm tracking-widest uppercase opacity-80">Phase {step.num}</span>
+                      <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase group-hover:text-dada-accent transition-colors">{step.title}</h3>
                     </div>
-                    <div className="md:w-2/3">
-                      <p className="text-xl text-dada-off-white/60 leading-relaxed">
+                    <div className="lg:w-7/12 lg:pt-8">
+                      <p className="text-2xl md:text-3xl lg:text-4xl text-dada-off-white/60 leading-tight font-light group-hover:text-white transition-colors">
                         {step.desc}
                       </p>
                     </div>
