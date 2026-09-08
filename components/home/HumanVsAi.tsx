@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform";
 
 export function HumanVsAi() {
   const containerRef = useRef(null);
@@ -11,25 +12,25 @@ export function HumanVsAi() {
   });
 
   // Phase 1 (0 - 0.3): "YOUR EMPLOYEES SHOULDN'T BE DOING ROBOT WORK"
-  const phase1Opacity = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
-  const phase1Scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
+  const phase1Opacity = useSafeTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
+  const phase1Scale = useSafeTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
 
   // Phase 2 (0.3 - 0.6): Chaotic blinking tasks
-  const chaosOpacity = useTransform(scrollYProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]);
+  const chaosOpacity = useSafeTransform(scrollYProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]);
   
   // Phase 2 inline task animations
-  const t1Y = useTransform(scrollYProgress, [0.3, 0.6], ["-100vh", "100vh"]);
-  const t2Y = useTransform(scrollYProgress, [0.3, 0.6], ["100vh", "-100vh"]);
-  const t3X = useTransform(scrollYProgress, [0.3, 0.6], ["-100vw", "100vw"]);
-  const t4X = useTransform(scrollYProgress, [0.3, 0.6], ["100vw", "-100vw"]);
-  const t5Scale = useTransform(scrollYProgress, [0.3, 0.6], [0, 5]);
-  const t5Opacity = useTransform(scrollYProgress, [0.3, 0.45, 0.6], [1, 0, 1]);
-  const t6Rotate = useTransform(scrollYProgress, [0.3, 0.6], [0, 360]);
-  const t6Scale = useTransform(scrollYProgress, [0.3, 0.6], [3, 0]);
+  const t1Y = useSafeTransform(scrollYProgress, [0.3, 0.6], ["-100vh", "100vh"]);
+  const t2Y = useSafeTransform(scrollYProgress, [0.3, 0.6], ["100vh", "-100vh"]);
+  const t3X = useSafeTransform(scrollYProgress, [0.3, 0.6], ["-100vw", "100vw"]);
+  const t4X = useSafeTransform(scrollYProgress, [0.3, 0.6], ["100vw", "-100vw"]);
+  const t5Scale = useSafeTransform(scrollYProgress, [0.3, 0.6], [0, 5]);
+  const t5Opacity = useSafeTransform(scrollYProgress, [0.3, 0.45, 0.6], [1, 0, 1]);
+  const t6Rotate = useSafeTransform(scrollYProgress, [0.3, 0.6], [0, 360]);
+  const t6Scale = useSafeTransform(scrollYProgress, [0.3, 0.6], [3, 0]);
 
   // Phase 3 (0.7 - 1.0): Simplified massive text
-  const phase3Opacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-  const phase3Scale = useTransform(scrollYProgress, [0.7, 1.0], [0.9, 1]);
+  const phase3Opacity = useSafeTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+  const phase3Scale = useSafeTransform(scrollYProgress, [0.7, 1.0], [0.9, 1]);
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-dada-near-black">

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform";
 import { useRef } from "react";
 import Image from "next/image";
 
@@ -14,8 +15,8 @@ const tasks = [
 ];
 
 function TaskItem({ task, scrollYProgress, tasksOpacity, tasksScale }: { task: any, scrollYProgress: MotionValue<number>, tasksOpacity: MotionValue<number>, tasksScale: MotionValue<number> }) {
-  const xOffset = useTransform(scrollYProgress, [0.5, 0.7], ["0px", task.left.startsWith("7") || task.left.startsWith("8") ? "-20vw" : "20vw"]);
-  const yOffset = useTransform(scrollYProgress, [0.5, 0.7], ["0px", task.top.startsWith("1") || task.top.startsWith("2") ? "20vh" : "-20vh"]);
+  const xOffset = useSafeTransform(scrollYProgress, [0.5, 0.7], ["0px", task.left.startsWith("7") || task.left.startsWith("8") ? "-20vw" : "20vw"]);
+  const yOffset = useSafeTransform(scrollYProgress, [0.5, 0.7], ["0px", task.top.startsWith("1") || task.top.startsWith("2") ? "20vh" : "-20vh"]);
   
   return (
     <motion.div
@@ -44,16 +45,16 @@ export function ProblemSection() {
 
   // Animation values
   // Phase 1: Object enters (0 - 0.2)
-  const objectScale = useTransform(scrollYProgress, [0, 0.2, 0.7, 0.9], [0, 1, 1, 1.5]);
-  const objectOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const objectScale = useSafeTransform(scrollYProgress, [0, 0.2, 0.7, 0.9], [0, 1, 1, 1.5]);
+  const objectOpacity = useSafeTransform(scrollYProgress, [0, 0.2], [0, 1]);
   
   // Phase 2: Tasks appear (0.3 - 0.5)
-  const tasksOpacity = useTransform(scrollYProgress, [0.2, 0.3, 0.6, 0.7], [0, 1, 1, 0]);
-  const tasksScale = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0.8, 1, 1, 0]);
+  const tasksOpacity = useSafeTransform(scrollYProgress, [0.2, 0.3, 0.6, 0.7], [0, 1, 1, 0]);
+  const tasksScale = useSafeTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0.8, 1, 1, 0]);
   
   // Phase 3: Consolidation text appears (0.7 - 0.9)
-  const finalOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-  const finalScale = useTransform(scrollYProgress, [0.7, 0.9], [0.8, 1]);
+  const finalOpacity = useSafeTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+  const finalScale = useSafeTransform(scrollYProgress, [0.7, 0.9], [0.8, 1]);
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-dada-near-black">

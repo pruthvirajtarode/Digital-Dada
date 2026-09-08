@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform";
 import { useRef } from "react";
 import Image from "next/image";
 
@@ -18,13 +19,13 @@ function StepItem({ step, i, totalSteps, scrollYProgress }: { step: any, i: numb
   const stepEnd = (i + 1) / totalSteps;
   const stepCenter = (stepStart + stepEnd) / 2;
   
-  const opacity = useTransform(
+  const opacity = useSafeTransform(
     scrollYProgress,
     [stepStart - 0.05, stepCenter, stepEnd + 0.05],
     [0, 1, 0]
   );
 
-  const yImg = useTransform(
+  const yImg = useSafeTransform(
     scrollYProgress,
     [stepStart, stepEnd],
     ["10%", "-10%"]

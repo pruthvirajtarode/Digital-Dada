@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { useRef } from "react";
@@ -13,34 +14,34 @@ export function HomeHero() {
   });
 
   // State 1: Hero Core (0 - 0.2)
-  const o1 = useTransform(scrollYProgress, [0, 0.15, 0.2], [1, 1, 0]);
-  const s1 = useTransform(scrollYProgress, [0, 0.2], [1, 2]);
-  const r1 = useTransform(scrollYProgress, [0, 0.2], [0, 45]);
-  const y1 = useTransform(scrollYProgress, [0, 0.2], ["0%", "-50%"]);
+  const o1 = useSafeTransform(scrollYProgress, [0, 0.15, 0.2], [1, 1, 0]);
+  const s1 = useSafeTransform(scrollYProgress, [0, 0.2], [1, 2]);
+  const r1 = useSafeTransform(scrollYProgress, [0, 0.2], [0, 45]);
+  const y1 = useSafeTransform(scrollYProgress, [0, 0.2], ["0%", "-50%"]);
 
   // State 2: Document Inbox (0.15 - 0.4)
-  const o2 = useTransform(scrollYProgress, [0.15, 0.2, 0.35, 0.4], [0, 1, 1, 0]);
-  const s2 = useTransform(scrollYProgress, [0.15, 0.3, 0.4], [0.5, 1, 1.5]);
-  const r2 = useTransform(scrollYProgress, [0.15, 0.4], [-45, 0]);
-  const x2 = useTransform(scrollYProgress, [0.15, 0.4], ["50%", "-50%"]);
+  const o2 = useSafeTransform(scrollYProgress, [0.15, 0.2, 0.35, 0.4], [0, 1, 1, 0]);
+  const s2 = useSafeTransform(scrollYProgress, [0.15, 0.3, 0.4], [0.5, 1, 1.5]);
+  const r2 = useSafeTransform(scrollYProgress, [0.15, 0.4], [-45, 0]);
+  const x2 = useSafeTransform(scrollYProgress, [0.15, 0.4], ["50%", "-50%"]);
 
   // State 3: Collection (0.35 - 0.6)
-  const o3 = useTransform(scrollYProgress, [0.35, 0.4, 0.55, 0.6], [0, 1, 1, 0]);
-  const s3 = useTransform(scrollYProgress, [0.35, 0.5, 0.6], [0.5, 1, 1.5]);
-  const r3 = useTransform(scrollYProgress, [0.35, 0.6], [45, -45]);
-  const y3 = useTransform(scrollYProgress, [0.35, 0.6], ["50%", "-50%"]);
+  const o3 = useSafeTransform(scrollYProgress, [0.35, 0.4, 0.55, 0.6], [0, 1, 1, 0]);
+  const s3 = useSafeTransform(scrollYProgress, [0.35, 0.5, 0.6], [0.5, 1, 1.5]);
+  const r3 = useSafeTransform(scrollYProgress, [0.35, 0.6], [45, -45]);
+  const y3 = useSafeTransform(scrollYProgress, [0.35, 0.6], ["50%", "-50%"]);
 
   // State 4: Workflow (0.55 - 0.8)
-  const o4 = useTransform(scrollYProgress, [0.55, 0.6, 0.75, 0.8], [0, 1, 1, 0]);
-  const s4 = useTransform(scrollYProgress, [0.55, 0.7, 0.8], [0.5, 1, 1.5]);
-  const r4 = useTransform(scrollYProgress, [0.55, 0.8], [-90, 0]);
-  const x4 = useTransform(scrollYProgress, [0.55, 0.8], ["-50%", "50%"]);
+  const o4 = useSafeTransform(scrollYProgress, [0.55, 0.6, 0.75, 0.8], [0, 1, 1, 0]);
+  const s4 = useSafeTransform(scrollYProgress, [0.55, 0.7, 0.8], [0.5, 1, 1.5]);
+  const r4 = useSafeTransform(scrollYProgress, [0.55, 0.8], [-90, 0]);
+  const x4 = useSafeTransform(scrollYProgress, [0.55, 0.8], ["-50%", "50%"]);
 
   // State 5: Executive Intelligence (0.75 - 1.0)
-  const o5 = useTransform(scrollYProgress, [0.75, 0.8, 1], [0, 1, 1]);
-  const s5 = useTransform(scrollYProgress, [0.75, 0.9, 1], [0.5, 1, 1.2]);
-  const r5 = useTransform(scrollYProgress, [0.75, 1], [45, 0]);
-  const y5 = useTransform(scrollYProgress, [0.75, 1], ["50%", "0%"]);
+  const o5 = useSafeTransform(scrollYProgress, [0.75, 0.8, 1], [0, 1, 1]);
+  const s5 = useSafeTransform(scrollYProgress, [0.75, 0.9, 1], [0.5, 1, 1.2]);
+  const r5 = useSafeTransform(scrollYProgress, [0.75, 1], [45, 0]);
+  const y5 = useSafeTransform(scrollYProgress, [0.75, 1], ["50%", "0%"]);
 
   return (
     <section ref={containerRef} className="relative h-[500vh] bg-dada-black" data-cursor="explore">

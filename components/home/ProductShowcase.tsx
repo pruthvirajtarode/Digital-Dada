@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -60,7 +61,7 @@ export function ProductShowcase() {
     offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+  const x = useSafeTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
 
   return (
     <section ref={containerRef} className="relative h-[500vh] bg-dada-near-black">
