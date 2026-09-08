@@ -19,24 +19,8 @@ export function HomeHero() {
   return (
     <section ref={containerRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-dada-black pt-20">
       
-      {/* 3D Floating Object */}
-      <motion.div 
-        style={{ y: yImage, rotate: rotateImage, scale: scaleImage }}
-        className="absolute inset-0 z-10 flex items-center justify-center lg:justify-end lg:pr-32 pointer-events-none opacity-80"
-      >
-        <div className="relative w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] max-w-[800px] max-h-[800px]">
-           <Image 
-             src="/hero-object.png" 
-             alt="Abstract AI Core" 
-             fill 
-             className="object-contain drop-shadow-2xl mix-blend-screen"
-             priority
-           />
-        </div>
-      </motion.div>
-
-      {/* Massive Typography Layer */}
-      <div className="relative z-20 w-full max-w-[100vw] px-6 text-center lg:text-left lg:pl-16 pointer-events-none mix-blend-difference">
+      {/* Background Text Layer (z-0) */}
+      <div className="absolute inset-0 z-0 flex flex-col justify-center px-6 lg:pl-16 w-full max-w-[100vw] text-center lg:text-left pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,8 +28,38 @@ export function HomeHero() {
           className="flex flex-col uppercase font-bold tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
         >
           <span className="block text-left">BUILD</span>
-          <span className="block text-center md:text-left md:pl-[20vw]">YOUR AI</span>
+          <span className="block text-center md:text-left md:pl-[20vw] opacity-0">YOUR AI</span>
           <span className="block text-right lg:text-left lg:pl-[5vw] text-dada-accent">WORKFORCE.</span>
+        </motion.div>
+      </div>
+
+      {/* 3D Floating Object (z-10) */}
+      <motion.div 
+        style={{ y: yImage, rotate: rotateImage, scale: scaleImage }}
+        className="absolute inset-0 z-10 flex items-center justify-center lg:justify-end lg:pr-32 pointer-events-none opacity-90"
+      >
+        <div className="relative w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] max-w-[800px] max-h-[800px]">
+           <Image 
+             src="/hero-object.png" 
+             alt="Abstract AI Core" 
+             fill 
+             className="object-contain mix-blend-screen"
+             priority
+           />
+        </div>
+      </motion.div>
+
+      {/* Foreground Text Layer (z-20) */}
+      <div className="relative z-20 w-full max-w-[100vw] px-6 text-center lg:text-left lg:pl-16 pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col uppercase font-bold tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
+        >
+          <span className="block text-left opacity-0">BUILD</span>
+          <span className="block text-center md:text-left md:pl-[20vw]">YOUR AI</span>
+          <span className="block text-right lg:text-left lg:pl-[5vw] opacity-0">WORKFORCE.</span>
         </motion.div>
       </div>
 
