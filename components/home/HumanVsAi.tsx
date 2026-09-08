@@ -42,7 +42,7 @@ export function HumanVsAi() {
         >
           <h2 className="text-4xl md:text-6xl lg:text-[6rem] font-bold tracking-tighter leading-[0.9] text-white text-center max-w-6xl">
             YOUR EMPLOYEES<br/>
-            SHOULDN'T BE DOING<br/>
+            SHOULDN&apos;T BE DOING<br/>
             <span className="text-dada-accent">ROBOT WORK.</span>
           </h2>
         </motion.div>

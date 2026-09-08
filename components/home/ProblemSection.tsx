@@ -64,7 +64,7 @@ export function ProblemSection() {
           <h2 className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-tighter leading-[0.9] text-white">
             YOUR NEXT<br/>
             EMPLOYEES<br/>
-            DON'T NEED<br/>
+            DON&apos;T NEED<br/>
             <span className="text-dada-accent">DESKS.</span>
           </h2>
         </div>

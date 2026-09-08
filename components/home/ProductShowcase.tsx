@@ -123,7 +123,7 @@ export function ProductShowcase() {
                 {/* Hover Metadata */}
                 <div className="absolute bottom-10 right-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 font-mono text-xs text-dada-accent text-right tracking-widest uppercase hidden lg:block">
                   <p>AI EMPLOYEE ACTIVE</p>
-                  <p>TASKS: {Math.floor(Math.random() * 100) + 20}</p>
+                  <p>TASKS: {24 + i * 13}</p>
                   <p>WORKFLOWS: 0{i + 3}</p>
                 </div>
               </div>
