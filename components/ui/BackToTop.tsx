@@ -35,10 +35,10 @@ export function BackToTop() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 left-6 z-[9000] p-3 rounded-full bg-dada-off-white text-dada-black shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300"
+          className="fixed bottom-[100px] right-6 z-[9000] p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-[0_0_20px_rgba(204,255,0,0.1)] hover:scale-110 hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] hover:bg-dada-accent hover:text-black hover:border-transparent transition-all duration-300"
           aria-label="Back to top"
         >
-          <ArrowUp size={24} />
+          <ArrowUp size={20} />
         </motion.button>
       )}
     </AnimatePresence>
