@@ -35,12 +35,28 @@ export function useSafeTransform(
     safeInput = safeInput.map(x => isNaN(x) ? 0 : x);
   }
 
+  // WAAPI ScrollTimeline CRASH FIX: WAAPI strictly requires offsets to be between 0 and 1.
+  // If Framer Motion passes negative values (e.g. -0.05) or >1 (e.g. 1.05) to WAAPI, 
+  // WAAPI throws "Offsets must be monotonically non-decreasing".
+  // We must clamp all inputs to [0, 1].
+  safeInput = safeInput.map(x => Math.max(0, Math.min(1, x)));
+
   // Ensure unique strictly increasing by adding a tiny epsilon if there are duplicates
-  // Actually Framer Motion allows duplicates (e.g. [0, 0.5, 0.5, 1]) in newer versions,
-  // but older versions or specific setups might crash. Let's ensure strictly increasing.
+  // This is required because after clamping (e.g., [-0.5, 0] becomes [0, 0]), 
+  // we might introduce duplicates that break monotonicity.
   for (let i = 1; i < safeInput.length; i++) {
     if (safeInput[i] <= safeInput[i - 1]) {
-      safeInput[i] = safeInput[i - 1] + 0.00001;
+      safeInput[i] = safeInput[i - 1] + 0.000001;
+    }
+  }
+
+  // Final safety check to make sure the epsilon didn't push us over 1
+  safeInput = safeInput.map(x => Math.min(1, x));
+
+  // If the epsilon clamping caused duplicates at 1 (e.g., [1, 1]), fix backwards
+  for (let i = safeInput.length - 2; i >= 0; i--) {
+    if (safeInput[i] >= safeInput[i + 1]) {
+      safeInput[i] = safeInput[i + 1] - 0.000001;
     }
   }
 
