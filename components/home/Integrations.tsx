@@ -58,8 +58,8 @@ export function Integrations() {
                     r="1"
                     fill="#ccff00"
                     animate={{
-                      cx: [50, endX],
-                      cy: [50, endY],
+                      cx: [50, 50 + (endX - 50) / 2, endX],
+                      cy: [50, 50 + (endY - 50) / 2, endY],
                       opacity: [0, 1, 0]
                     }}
                     transition={{

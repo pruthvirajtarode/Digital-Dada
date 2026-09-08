@@ -19,7 +19,7 @@ export function AccountingFirmsSection() {
       {/* Central Core */}
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <motion.div 
-          animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+          animate={{ rotate: [0, 180, 360], scale: [1, 1.05, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full border border-white/10 flex items-center justify-center"
         >
