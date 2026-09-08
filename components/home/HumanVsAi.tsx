@@ -33,7 +33,7 @@ export function HumanVsAi() {
   const phase3Scale = useSafeTransform(scrollYProgress, [0.7, 1.0], [0.9, 1]);
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-dada-near-black">
+    <section ref={containerRef} style={{ minHeight: "300vh" }} className="relative h-[300vh] bg-dada-near-black">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center p-6 bg-dada-black">
         
         {/* Phase 1 */}

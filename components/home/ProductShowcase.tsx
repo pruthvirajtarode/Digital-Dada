@@ -64,7 +64,7 @@ export function ProductShowcase() {
   const x = useSafeTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] bg-dada-near-black">
+    <section ref={containerRef} style={{ minHeight: "500vh" }} className="relative h-[500vh] bg-dada-near-black">
       
       {/* Intro Overlay Text */}
       <div className="absolute top-10 left-6 lg:left-16 z-50 pointer-events-none">

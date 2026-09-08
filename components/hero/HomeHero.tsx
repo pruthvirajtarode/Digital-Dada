@@ -44,7 +44,7 @@ export function HomeHero() {
   const y5 = useSafeTransform(scrollYProgress, [0.75, 1], ["50%", "0%"]);
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] bg-dada-black" data-cursor="explore">
+    <section ref={containerRef} style={{ minHeight: "500vh" }} className="relative h-[500vh] bg-dada-black" data-cursor="explore">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center pt-20">
         
         {/* Background Text Layer (z-0) */}

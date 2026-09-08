@@ -75,7 +75,7 @@ export function HowItWorks() {
   });
 
   return (
-    <section ref={containerRef} className="relative h-[600vh] bg-dada-near-black">
+    <section ref={containerRef} style={{ minHeight: "600vh" }} className="relative h-[600vh] bg-dada-near-black">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col md:flex-row items-center justify-between p-6 lg:p-24 bg-dada-black">
         
         {/* Intro Overlay Text */}
