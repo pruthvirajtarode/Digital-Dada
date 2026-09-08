@@ -4,95 +4,106 @@ import { motion } from "framer-motion";
 import { Reveal } from "@/components/animations/Reveal";
 import { Headline } from "@/components/typography/Headline";
 
-const systems = [
-  "QuickBooks",
-  "CRM platforms",
-  "Email",
-  "SMS",
-  "Document management systems",
-  "Calendars",
-  "APIs",
-  "Internal databases",
-  "Custom business software",
+const nodes = [
+  { name: "QuickBooks", x: "-30%", y: "-30%" },
+  { name: "Xero", x: "30%", y: "-40%" },
+  { name: "Karbon", x: "-40%", y: "10%" },
+  { name: "Salesforce", x: "40%", y: "20%" },
+  { name: "Outlook", x: "-20%", y: "40%" },
+  { name: "SharePoint", x: "20%", y: "40%" },
 ];
 
 export function Integrations() {
   return (
     <section className="py-32 bg-dada-near-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
+        <div className="relative z-10">
           <Reveal>
-            <Headline text="AI That Works With the Systems You Already Use" as="h2" className="text-4xl md:text-5xl font-bold mb-8" />
+            <Headline text="AI That Works With the Systems You Already Use" as="h2" className="text-4xl md:text-6xl font-bold mb-8" />
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-xl text-dada-off-white/80 leading-relaxed mb-6">
+            <p className="text-xl md:text-2xl text-dada-off-white/80 leading-relaxed mb-6 font-light">
               Your business doesn’t need another disconnected application.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="text-lg text-dada-off-white/60 leading-relaxed mb-12">
-              Digital Dada builds AI systems that can connect with the technology already running your business.
+            <p className="text-lg md:text-xl text-dada-off-white/60 leading-relaxed mb-12">
+              Digital Dada builds AI systems that plug directly into the technology already running your business—processing data, sending emails, and updating records just like a human employee would.
             </p>
           </Reveal>
         </div>
 
-        <div className="relative border border-white/10 rounded-xl p-8 bg-dada-black flex flex-col items-center justify-center min-h-[500px]">
-          {/* Ecosystem Visualization */}
+        {/* Network Visualization */}
+        <div className="relative w-full aspect-square max-w-[600px] mx-auto flex items-center justify-center">
           
-          <div className="flex flex-col items-center w-full gap-12 relative z-10">
-            {/* Top Layer */}
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="px-6 py-3 border border-dada-accent bg-dada-accent/10 rounded-sm w-64 text-center text-dada-accent font-bold tracking-widest uppercase text-sm"
-            >
-              AI Workforce
-            </motion.div>
+          {/* SVG Connection Lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            {nodes.map((node, i) => {
+              const nx = parseFloat(node.x);
+              const ny = parseFloat(node.y);
+              // Map percentage offsets (-40% to 40%) to SVG coordinates (10 to 90), where center is 50,50
+              const endX = 50 + (nx * 1.5);
+              const endY = 50 + (ny * 1.5);
+              
+              return (
+                <g key={i}>
+                  <path 
+                    d={`M 50 50 L ${endX} ${endY}`} 
+                    stroke="rgba(255,255,255,0.1)" 
+                    strokeWidth="0.5"
+                    fill="none"
+                  />
+                  {/* Pulsing data dot */}
+                  <motion.circle
+                    r="1"
+                    fill="#ccff00"
+                    animate={{
+                      cx: [50, endX],
+                      cy: [50, endY],
+                      opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.4
+                    }}
+                  />
+                </g>
+              );
+            })}
+          </svg>
 
-            {/* Down Arrow */}
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
+          {/* Central Core */}
+          <div className="absolute z-20 w-32 h-32 bg-dada-black border border-dada-accent flex items-center justify-center rounded-full shadow-[0_0_50px_rgba(204,255,0,0.2)]">
+            <motion.div 
+              animate={{ scale: [1, 1.05, 1] }} 
               transition={{ duration: 2, repeat: Infinity }}
-              className="h-12 w-[1px] bg-gradient-to-b from-dada-accent to-dada-off-white/20"
-            />
-
-            {/* Middle Layer */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="px-6 py-3 border border-white/20 bg-white/5 rounded-sm w-72 text-center text-dada-off-white font-medium tracking-widest uppercase text-xs"
+              className="text-center"
             >
-              Business Intelligence Layer
+              <span className="block text-dada-accent font-bold tracking-widest text-xs uppercase">Dada</span>
+              <span className="block text-white font-bold tracking-widest text-xs uppercase">Core</span>
             </motion.div>
-
-            {/* Down Arrows - Multiple */}
-            <div className="flex justify-between w-64">
-               <motion.div animate={{ height: [20, 48, 20] }} transition={{ duration: 2, repeat: Infinity, delay: 0 }} className="w-[1px] bg-white/20 h-12" />
-               <motion.div animate={{ height: [20, 48, 20] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }} className="w-[1px] bg-white/20 h-12" />
-               <motion.div animate={{ height: [20, 48, 20] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }} className="w-[1px] bg-white/20 h-12" />
-            </div>
-
-            {/* Bottom Layer - Grid of Systems */}
-            <div className="flex flex-wrap justify-center gap-3 w-full">
-              {systems.map((sys, idx) => (
-                <motion.div
-                  key={sys}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 + (idx * 0.05) }}
-                  className="px-3 py-2 border border-white/10 bg-dada-near-black rounded-sm text-xs text-white/50"
-                >
-                  {sys}
-                </motion.div>
-              ))}
-            </div>
           </div>
-          
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-dada-accent/5 rounded-full blur-[80px] pointer-events-none" />
+
+          {/* Orbiting Nodes */}
+          {nodes.map((node, i) => (
+            <motion.div
+              key={node.name}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 + 0.5 }}
+              style={{
+                x: node.x,
+                y: node.y,
+              }}
+              className="absolute z-10 px-4 py-2 bg-white/5 border border-white/20 backdrop-blur-md rounded-sm text-xs font-mono tracking-widest text-white uppercase whitespace-nowrap"
+            >
+              {node.name}
+            </motion.div>
+          ))}
+
         </div>
       </div>
     </section>

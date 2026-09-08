@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
+import { GlobalCursor } from "@/components/ui/GlobalCursor";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 export default function RootLayout({
   children,
@@ -29,6 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${laBelleAurore.variable} bg-dada-black text-dada-warm-white antialiased selection:bg-dada-accent selection:text-dada-black`}>
       <body className="min-h-screen flex flex-col">
+        <GlobalCursor />
+        <ScrollProgress />
         <Navbar />
         <main className="flex-grow pt-20">
           {children}
