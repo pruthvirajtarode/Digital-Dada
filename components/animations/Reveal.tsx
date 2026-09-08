@@ -11,7 +11,7 @@ interface RevealProps {
 
 export const Reveal = ({ children, width = "fit-content", delay = 0 }: RevealProps) => {
   return (
-    <div style={{ position: "relative", width, overflow: "hidden" }}>
+    <div style={{ position: "relative", width: "100%" }}>
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 75 },
@@ -19,7 +19,7 @@ export const Reveal = ({ children, width = "fit-content", delay = 0 }: RevealPro
         }}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 0.6, delay: delay, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}

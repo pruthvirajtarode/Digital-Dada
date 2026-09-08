@@ -8,18 +8,18 @@ export function HomeHero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
       {/* Abstract Background Node Visualization */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-20 flex items-center justify-center">
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-end overflow-hidden right-[-20%]">
         <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-          className="w-[800px] h-[800px] border border-white/10 rounded-full border-dashed"
+          animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="w-[800px] h-[800px] border-2 border-white/20 rounded-full border-dashed opacity-40"
         />
         <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[600px] h-[600px] border border-white/5 rounded-full"
+          animate={{ rotate: -360, scale: [1, 1.1, 1] }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[600px] h-[600px] border border-dada-accent/30 rounded-full opacity-60"
         />
-        <div className="absolute w-[1000px] h-[1000px] bg-dada-accent/5 rounded-full blur-[100px]" />
+        <div className="absolute w-[800px] h-[800px] bg-dada-accent/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

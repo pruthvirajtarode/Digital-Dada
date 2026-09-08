@@ -43,7 +43,7 @@ export function Headline({ text, className, as: Component = "h2", delay = 0 }: H
       variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "0px" }}
       className={cn("flex flex-wrap", className)}
     >
       {/* We use a span as an intermediate wrapper if Component is not a display block, but motion component maps correctly */}

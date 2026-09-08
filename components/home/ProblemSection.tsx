@@ -79,7 +79,7 @@ export function ProblemSection() {
       </div>
       
       {/* Background typographic noise */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 opacity-[0.02] pointer-events-none whitespace-nowrap font-bold text-[20vw] leading-none overflow-hidden uppercase">
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 opacity-[0.05] pointer-events-none whitespace-nowrap font-bold text-[20vw] leading-none overflow-hidden uppercase text-white">
         Repetition Elimination
       </div>
     </section>
