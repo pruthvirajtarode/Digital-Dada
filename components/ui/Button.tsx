@@ -63,37 +63,35 @@ export function Button({
     </>
   );
 
-  const Component = motion.button as any;
-
   if (href) {
     return (
       <Link href={href} passHref legacyBehavior>
-        <Component
-          ref={ref}
+        <motion.a
+          ref={ref as any}
           onMouseMove={handleMouse}
           onMouseLeave={reset}
           animate={{ x: position.x, y: position.y }}
           transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
           className={cn(baseStyles, variants[variant], sizes[size], className)}
-          {...props}
+          {...props as any}
         >
           {content}
-        </Component>
+        </motion.a>
       </Link>
     );
   }
 
   return (
-    <Component
-      ref={ref}
+    <motion.button
+      ref={ref as any}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       className={cn(baseStyles, variants[variant], sizes[size], className)}
-      {...props}
+      {...props as any}
     >
       {content}
-    </Component>
+    </motion.button>
   );
 }
