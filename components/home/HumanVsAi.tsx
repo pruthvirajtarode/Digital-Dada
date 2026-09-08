@@ -17,6 +17,16 @@ export function HumanVsAi() {
   // Phase 2 (0.3 - 0.6): Chaotic blinking tasks
   const chaosOpacity = useTransform(scrollYProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]);
   
+  // Phase 2 inline task animations
+  const t1Y = useTransform(scrollYProgress, [0.3, 0.6], ["-100vh", "100vh"]);
+  const t2Y = useTransform(scrollYProgress, [0.3, 0.6], ["100vh", "-100vh"]);
+  const t3X = useTransform(scrollYProgress, [0.3, 0.6], ["-100vw", "100vw"]);
+  const t4X = useTransform(scrollYProgress, [0.3, 0.6], ["100vw", "-100vw"]);
+  const t5Scale = useTransform(scrollYProgress, [0.3, 0.6], [0, 5]);
+  const t5Opacity = useTransform(scrollYProgress, [0.3, 0.45, 0.6], [1, 0, 1]);
+  const t6Rotate = useTransform(scrollYProgress, [0.3, 0.6], [0, 360]);
+  const t6Scale = useTransform(scrollYProgress, [0.3, 0.6], [3, 0]);
+
   // Phase 3 (0.7 - 1.0): Simplified massive text
   const phase3Opacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
   const phase3Scale = useTransform(scrollYProgress, [0.7, 1.0], [0.9, 1]);
@@ -42,14 +52,13 @@ export function HumanVsAi() {
           style={{ opacity: chaosOpacity }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
         >
-          {/* We'll use CSS animations for the rapid flashing when this container is visible to save React re-renders */}
           <div className="relative w-full h-full flex items-center justify-center text-white/50 font-mono text-2xl md:text-5xl font-bold uppercase overflow-hidden">
-            <motion.span style={{ y: useTransform(scrollYProgress, [0.3, 0.6], ["-100vh", "100vh"]), x: "-20vw" }} className="absolute">sending reminders</motion.span>
-            <motion.span style={{ y: useTransform(scrollYProgress, [0.3, 0.6], ["100vh", "-100vh"]), x: "20vw" }} className="absolute">copying information</motion.span>
-            <motion.span style={{ x: useTransform(scrollYProgress, [0.3, 0.6], ["-100vw", "100vw"]), y: "-20vh" }} className="absolute">chasing documents</motion.span>
-            <motion.span style={{ x: useTransform(scrollYProgress, [0.3, 0.6], ["100vw", "-100vw"]), y: "20vh" }} className="absolute text-dada-accent">checking status</motion.span>
-            <motion.span style={{ scale: useTransform(scrollYProgress, [0.3, 0.6], [0, 5]), opacity: useTransform(scrollYProgress, [0.3, 0.45, 0.6], [1, 0, 1]) }} className="absolute">searching databases</motion.span>
-            <motion.span style={{ rotate: useTransform(scrollYProgress, [0.3, 0.6], [0, 360]), scale: useTransform(scrollYProgress, [0.3, 0.6], [3, 0]) }} className="absolute">following up</motion.span>
+            <motion.span style={{ y: t1Y, x: "-20vw" }} className="absolute">sending reminders</motion.span>
+            <motion.span style={{ y: t2Y, x: "20vw" }} className="absolute">copying information</motion.span>
+            <motion.span style={{ x: t3X, y: "-20vh" }} className="absolute">chasing documents</motion.span>
+            <motion.span style={{ x: t4X, y: "20vh" }} className="absolute text-dada-accent">checking status</motion.span>
+            <motion.span style={{ scale: t5Scale, opacity: t5Opacity }} className="absolute">searching databases</motion.span>
+            <motion.span style={{ rotate: t6Rotate, scale: t6Scale }} className="absolute">following up</motion.span>
           </div>
         </motion.div>
 

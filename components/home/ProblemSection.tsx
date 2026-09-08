@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
@@ -12,6 +12,28 @@ const tasks = [
   { text: "EMAIL", top: "40%", left: "80%" },
   { text: "REPORTING", top: "50%", left: "5%" },
 ];
+
+function TaskItem({ task, scrollYProgress, tasksOpacity, tasksScale }: { task: any, scrollYProgress: MotionValue<number>, tasksOpacity: MotionValue<number>, tasksScale: MotionValue<number> }) {
+  const xOffset = useTransform(scrollYProgress, [0.5, 0.7], ["0px", task.left.startsWith("7") || task.left.startsWith("8") ? "-20vw" : "20vw"]);
+  const yOffset = useTransform(scrollYProgress, [0.5, 0.7], ["0px", task.top.startsWith("1") || task.top.startsWith("2") ? "20vh" : "-20vh"]);
+  
+  return (
+    <motion.div
+      style={{ 
+        opacity: tasksOpacity, 
+        scale: tasksScale,
+        x: xOffset,
+        y: yOffset,
+        position: "absolute",
+        top: task.top,
+        left: task.left
+      }}
+      className="px-4 py-2 border border-white/20 bg-black/50 backdrop-blur-md text-white/80 font-mono text-xs md:text-sm tracking-widest rounded-sm"
+    >
+      {task.text}
+    </motion.div>
+  );
+}
 
 export function ProblemSection() {
   const containerRef = useRef(null);
@@ -57,29 +79,9 @@ export function ProblemSection() {
 
         {/* The Repetitive Tasks */}
         <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-          {tasks.map((task, i) => {
-            // Calculate a pull-in effect based on scroll
-            const xOffset = useTransform(scrollYProgress, [0.5, 0.7], ["0px", task.left.startsWith("7") || task.left.startsWith("8") ? "-20vw" : "20vw"]);
-            const yOffset = useTransform(scrollYProgress, [0.5, 0.7], ["0px", task.top.startsWith("1") || task.top.startsWith("2") ? "20vh" : "-20vh"]);
-            
-            return (
-              <motion.div
-                key={i}
-                style={{ 
-                  opacity: tasksOpacity, 
-                  scale: tasksScale,
-                  x: xOffset,
-                  y: yOffset,
-                  position: "absolute",
-                  top: task.top,
-                  left: task.left
-                }}
-                className="px-4 py-2 border border-white/20 bg-black/50 backdrop-blur-md text-white/80 font-mono text-xs md:text-sm tracking-widest rounded-sm"
-              >
-                {task.text}
-              </motion.div>
-            );
-          })}
+          {tasks.map((task, i) => (
+            <TaskItem key={i} task={task} scrollYProgress={scrollYProgress} tasksOpacity={tasksOpacity} tasksScale={tasksScale} />
+          ))}
         </div>
 
         {/* Final Consolidated State */}
