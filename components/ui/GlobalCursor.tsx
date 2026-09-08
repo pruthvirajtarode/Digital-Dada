@@ -66,9 +66,6 @@ export function GlobalCursor() {
     }
   };
 
-  // Do not render on mobile to save performance
-  if (typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches) return null;
-
   return (
     <motion.div
       variants={variants}
