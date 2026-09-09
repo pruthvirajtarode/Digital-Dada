@@ -68,23 +68,26 @@ export function ProductShowcase() {
       
       {/* Intro Overlay Text */}
       <div className="absolute top-10 left-6 lg:left-16 z-50 pointer-events-none">
-        <h2 className="text-2xl md:text-4xl font-bold tracking-widest uppercase text-white mix-blend-difference">
+        <h2 className="text-2xl md:text-4xl font-display font-black tracking-widest uppercase text-white mix-blend-difference">
           MEET YOUR AI WORKFORCE.
         </h2>
       </div>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-dada-black">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-dada-dark-gray/30 via-dada-black to-dada-black">
         <motion.div style={{ x }} className="flex h-full w-[500vw]">
           
           {products.map((product, i) => (
             <div key={product.id} className="relative w-[100vw] h-full flex flex-col lg:flex-row items-center justify-center p-6 lg:p-24 group">
               
               {/* Product Info (Left) */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center z-20 pr-0 lg:pr-12">
-                <span className="text-dada-accent font-mono text-xl md:text-2xl tracking-widest mb-4 block">
+              <div className="w-full lg:w-1/2 flex flex-col justify-center z-20 pr-0 lg:pr-12 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 lg:p-12 shadow-2xl transition-all duration-500 hover:border-white/20 hover:bg-white/10 relative overflow-hidden group/card">
+                {/* Subtle animated gradient background inside card */}
+                <div className="absolute inset-0 bg-gradient-to-br from-dada-accent/5 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                
+                <span className="text-dada-accent font-mono text-xl md:text-2xl tracking-widest mb-4 block relative z-10">
                   {product.id}
                 </span>
-                <h3 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tighter leading-none text-white mb-6 uppercase">
+                <h3 className="text-5xl md:text-6xl lg:text-[5rem] font-display font-black tracking-tighter leading-none text-white mb-6 uppercase relative z-10">
                   {product.name}
                 </h3>
                 <h4 className="text-2xl md:text-4xl text-dada-off-white/80 font-light mb-8">

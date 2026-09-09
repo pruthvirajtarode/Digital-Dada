@@ -45,7 +45,7 @@ export function HomeHero() {
 
   return (
     <section ref={containerRef} style={{ minHeight: "500vh" }} className="relative h-[500vh] bg-dada-black" data-cursor="explore">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center pt-20">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center pt-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-dada-dark-gray/20 via-dada-black to-dada-black">
         
         {/* Background Text Layer (z-0) */}
         <div className="absolute inset-0 z-0 flex flex-col justify-center px-6 lg:pl-16 w-full max-w-[100vw] text-center lg:text-left pointer-events-none">
@@ -53,7 +53,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col uppercase font-bold tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
+            className="flex flex-col uppercase font-display font-black tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
           >
             <span className="block text-left">BUILD</span>
             <span className="block text-center md:text-left md:pl-[20vw] opacity-0">YOUR AI</span>
@@ -99,7 +99,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col uppercase font-bold tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
+            className="flex flex-col uppercase font-display font-black tracking-tighter leading-[0.8] text-[18vw] md:text-[14vw] lg:text-[12vw] text-white"
           >
             <span className="block text-left opacity-0">BUILD</span>
             <span className="block text-center md:text-left md:pl-[20vw]">YOUR AI</span>
