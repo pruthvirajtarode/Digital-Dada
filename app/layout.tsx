@@ -68,9 +68,7 @@ export default function RootLayout({
         <BackToTop />
         <ChatbotWidget />
         <Navbar />
-        <main className="flex-grow pt-20 relative z-10">
-          {children}
-        </main>
+        <main className="flex-grow w-full relative z-0">{children}</main>
         <Footer />
       </body>
     </html>
