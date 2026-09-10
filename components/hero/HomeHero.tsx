@@ -1,104 +1,127 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useSafeTransform } from "@/lib/useSafeTransform";
-import { Button } from "@/components/ui/Button";
-import Image from "next/image";
-import { useRef } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform"; // If needed, but maybe not for simple carousel
+
+const slides = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop",
+    text: (
+      <>
+        WE BUILD <br />
+        <span className="text-dada-gray">INTELLIGENT</span> <br />
+        AI SYSTEMS
+      </>
+    )
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop",
+    text: (
+      <>
+        DESIGNED FOR <br />
+        <span className="text-dada-gray">ACCOUNTING</span> <br />
+        FIRMS
+      </>
+    )
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=2000&auto=format&fit=crop",
+    text: (
+      <>
+        REPLACE <br />
+        <span className="text-dada-gray">REPETITIVE</span> <br />
+        TASKS
+      </>
+    )
+  }
+];
 
 export function HomeHero() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  // The 3D object floats and scales up as user scrolls
-  const scale = useSafeTransform(scrollYProgress, [0, 1], [0.8, 1.5]);
-  const y = useSafeTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const rotate = useSafeTransform(scrollYProgress, [0, 1], [-10, 20]);
-  
-  // Background typography also moves slightly for parallax
-  const textYBg = useSafeTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textYFg = useSafeTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  // Auto-advance
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section ref={containerRef} style={{ minHeight: "200vh" }} className="relative bg-dada-black" data-cursor="explore">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center bg-dada-black">
-        
-        {/* Layer 1: Background Typography (z-0) */}
-        <motion.div 
-          style={{ y: textYBg }}
-          className="absolute inset-0 z-0 flex flex-col justify-center px-4 md:px-12 w-full text-left pointer-events-none"
+    <section className="relative w-full h-screen overflow-hidden bg-dada-near-black">
+      
+      {/* Carousel Backgrounds */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute inset-0"
         >
-          <div className="flex flex-col font-display font-black uppercase text-huge text-white">
-            <span className="block translate-x-[5vw]">BUILD</span>
-            <span className="block translate-x-[15vw] text-dada-gray">YOUR AI</span>
-            <span className="block translate-x-[5vw]">WORKFORCE.</span>
-          </div>
+          <img 
+            src={slides[currentSlide].image} 
+            alt="Hero Background" 
+            className="w-full h-full object-cover object-center grayscale opacity-30 mix-blend-screen"
+          />
         </motion.div>
+      </AnimatePresence>
 
-        {/* Layer 2: 3D Floating Object (z-10) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-          <motion.div 
-            style={{ scale, y, rotate }} 
-            className="relative w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] max-w-[1200px] max-h-[1200px] right-[-10vw] top-[-5vh]"
-          >
-             <Image 
-               src="/hero-object.png" 
-               alt="AI Workforce Core" 
-               fill 
-               className="object-contain" 
-               priority 
-             />
-          </motion.div>
-        </div>
-
-        {/* Layer 3: Foreground Typography (z-20) */}
-        {/* Only "BUILD" and "WORKFORCE" are opaque here to sit in front of the image, "YOUR AI" is hidden so the image covers it. Or vice versa. Let's make "BUILD" transparent, so the image covers it, and "YOUR AI" opaque so it covers the image. */}
-        <motion.div 
-          style={{ y: textYFg }}
-          className="absolute inset-0 z-20 flex flex-col justify-center px-4 md:px-12 w-full text-left pointer-events-none mix-blend-normal"
-        >
-          <div className="flex flex-col font-display font-black uppercase text-huge text-white">
-            <span className="block translate-x-[5vw] opacity-0">BUILD</span>
-            <span className="block translate-x-[15vw] text-white">YOUR AI</span>
-            <span className="block translate-x-[5vw] opacity-0">WORKFORCE.</span>
-          </div>
-        </motion.div>
-
-        {/* Interactive Elements / Descriptions (z-30) */}
-        <div className="absolute bottom-12 left-0 w-full z-30 px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 pointer-events-auto">
-          <motion.div
+      {/* Massive Centered Text */}
+      <div className="absolute inset-0 flex items-center justify-center px-6 pointer-events-none z-10">
+        <AnimatePresence mode="wait">
+          <motion.h1
+            key={currentSlide}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-md lg:max-w-xl"
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display font-black text-[12vw] uppercase tracking-tighter leading-[0.85] text-center text-white mix-blend-difference"
           >
-            <p className="text-xl md:text-2xl text-dada-off-white/80 leading-relaxed font-light mb-6 mix-blend-difference">
-              AI employees that handle the repetitive work inside your accounting firm—so your people can focus on the work that actually requires people.
-            </p>
-            <p className="text-sm text-dada-off-white/60 font-sans tracking-wide leading-relaxed mix-blend-difference max-w-sm">
-              Digital Dada builds, deploys, and manages intelligent AI systems that can collect documents, pursue unpaid invoices, document processes, analyze workflows, and help executives make better decisions.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-start md:items-end gap-6 pb-4"
-          >
-            <p className="text-xs text-dada-off-white/60 uppercase tracking-[0.2em] mix-blend-difference">
-              Built for accounting firms. Powered by Dada AI.
-            </p>
-            <Button href="/contact" size="lg" className="bg-white text-black hover:bg-dada-gray hover:text-white border-none rounded-none text-xs font-bold tracking-widest px-8 py-5">
-              SEE WHAT YOUR FIRM CAN AUTOMATE →
-            </Button>
-          </motion.div>
-        </div>
-
+            {slides[currentSlide].text}
+          </motion.h1>
+        </AnimatePresence>
       </div>
+
+      {/* Invisible Click Areas for Next/Prev */}
+      <div className="absolute inset-0 flex z-20">
+        <button 
+          onClick={prevSlide}
+          className="w-1/2 h-full cursor-w-resize outline-none"
+          aria-label="Previous Slide"
+        />
+        <button 
+          onClick={nextSlide}
+          className="w-1/2 h-full cursor-e-resize outline-none"
+          aria-label="Next Slide"
+        />
+      </div>
+
+      {/* Pagination Dots (Bottom Right) */}
+      <div className="absolute bottom-12 right-12 flex gap-4 z-30">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            className={`h-2 transition-all duration-300 rounded-none bg-white ${
+              currentSlide === idx ? "w-12 opacity-100" : "w-4 opacity-40 hover:opacity-80"
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+
     </section>
   );
 }

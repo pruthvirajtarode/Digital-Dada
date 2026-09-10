@@ -1,119 +1,82 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 
-const products = [
+const works = [
   {
-    num: "01",
-    name: "RELENTLESS AI",
-    title: "YOUR AI\nEXECUTIVE\nCOACH.",
-    desc: "An intelligent executive-level advisor that helps business leaders analyze performance, identify opportunities, challenge assumptions, and make better decisions.",
-    img: "/product-executive.png",
-    bg: "bg-dada-near-black",
-    textColor: "text-white"
+    title: "Relentless AI",
+    category: "Executive Coach",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
+    link: "/products/relentless-ai",
+    aspect: "aspect-[4/3]"
   },
   {
-    num: "02",
-    name: "YOURINBOXHERO",
-    title: "YOUR AI\nDOCUMENT\nCOLLECTION\nEMPLOYEE.",
-    desc: "A relentless AI employee that chases clients for missing files, automatically organizes uploads, and ensures your team has everything they need to start work.",
-    img: "/product-inbox.png",
-    bg: "bg-dada-black",
-    textColor: "text-white"
+    title: "YourInboxHero",
+    category: "Document Collection",
+    image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?q=80&w=1000&auto=format&fit=crop",
+    link: "/products/yourinboxhero",
+    aspect: "aspect-[3/4]"
   },
   {
-    num: "03",
-    name: "COLLECTAI",
-    title: "YOUR AI\nCOLLECTIONS\nEMPLOYEE.",
-    desc: "An AI employee dedicated to following up on unpaid invoices, sending polite reminders, and managing the delicate process of getting your firm paid.",
-    img: "/product-collect.png",
-    bg: "bg-white",
-    textColor: "text-dada-black"
+    title: "CollectAI",
+    category: "Invoice Collections",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop",
+    link: "/products/collectai",
+    aspect: "aspect-[4/5]"
   },
   {
-    num: "04",
-    name: "SOPBOTAI",
-    title: "YOUR AI\nPROCESS\nDOCUMENTATION\nEMPLOYEE.",
-    desc: "An intelligent system that watches how work gets done, writes step-by-step procedures, and instantly answers staff questions based on your firm's exact processes.",
-    img: "/product-sop.png",
-    bg: "bg-dada-near-black",
-    textColor: "text-white"
-  },
-  {
-    num: "05",
-    name: "WORKFLOWIQ",
-    title: "YOUR AI\nWORKFLOW\nANALYST.",
-    desc: "An analytical AI that examines your firm's operational data, identifies bottlenecks, measures efficiency, and recommends improvements to how work flows through your team.",
-    img: "/product-workflow.png",
-    bg: "bg-dada-black",
-    textColor: "text-white"
+    title: "SOPBotAI",
+    category: "Process Documentation",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop",
+    link: "/products/sopbotai",
+    aspect: "aspect-[4/3]"
   }
 ];
 
 export function ProductShowcase() {
   return (
-    <section className="relative w-full">
-      {/* Intro Section */}
-      <div className="min-h-screen flex flex-col justify-center px-6 md:px-24 bg-dada-black text-white py-32">
-        <h2 className="font-display font-black text-huge uppercase tracking-tighter leading-none mb-12">
-          MEET YOUR AI<br/>
-          WORKFORCE
-        </h2>
-        <p className="text-xl md:text-3xl font-light max-w-3xl leading-relaxed text-dada-gray mb-16">
-          Instead of giving you another collection of disconnected AI tools, Digital Dada gives your business specialized AI capabilities designed to work together.
-        </p>
-      </div>
+    <section className="bg-dada-off-white text-dada-black py-32 px-6 md:px-12 w-full">
+      <div className="max-w-[1600px] mx-auto">
+        
+        {/* Section Header */}
+        <div className="flex justify-between items-end mb-16 gap-4">
+          <h2 className="font-display font-black text-6xl md:text-8xl uppercase tracking-tighter leading-none">
+            THE WORKFORCE
+          </h2>
+          <Link href="/products" className="text-sm font-bold tracking-widest uppercase border-b border-dada-black/20 hover:border-dada-black pb-1 transition-colors whitespace-nowrap mb-2">
+            View all employees
+          </Link>
+        </div>
 
-      {/* Sticky Stacking Product Sections */}
-      <div className="relative">
-        {products.map((product, i) => (
-          <div 
-            key={product.num}
-            className={`sticky top-0 h-screen w-full flex items-center overflow-hidden ${product.bg} ${product.textColor}`}
-            style={{ zIndex: i + 10 }}
-            data-cursor="view"
-          >
-            <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-24 w-full">
-              
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full h-full py-24 gap-12 relative z-20">
-                {/* Left Side: Typography */}
-                <div className="flex-1 flex flex-col">
-                  <span className="font-mono text-sm tracking-widest mb-6 opacity-60">
-                    {product.num} — {product.name}
-                  </span>
-                  <h3 className="font-display font-black text-display uppercase tracking-tighter leading-[0.85] mb-8 whitespace-pre-line mix-blend-difference">
-                    {product.title}
-                  </h3>
-                  <p className="text-lg md:text-xl font-light max-w-md leading-relaxed opacity-80 mb-12 mix-blend-difference">
-                    {product.desc}
-                  </p>
-                  <div>
-                    <Button href={`/products#${product.name.toLowerCase()}`} className="bg-transparent border border-current hover:bg-current hover:text-dada-black mix-blend-difference px-8 py-4 rounded-none text-xs font-bold tracking-widest uppercase">
-                      LEARN MORE →
-                    </Button>
-                  </div>
+        {/* Masonry-style Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-24">
+          {works.map((work, idx) => (
+            <motion.div 
+              key={work.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className={`w-full relative group block ${idx % 2 !== 0 ? 'md:mt-32' : ''}`}
+            >
+              <Link href={work.link} className="block w-full">
+                <div className={`w-full overflow-hidden bg-dada-gray/10 ${work.aspect}`}>
+                  <img 
+                    src={work.image} 
+                    alt={work.title}
+                    className="w-full h-full object-cover grayscale opacity-80 group-hover:scale-[1.03] group-hover:opacity-100 group-hover:-rotate-[1deg] transition-all duration-700 ease-out"
+                  />
                 </div>
-              </div>
-              
-              {/* Right Side / Background: Image */}
-              <div className="absolute inset-y-0 right-0 w-full lg:w-1/2 flex items-center justify-center lg:justify-end z-10 pointer-events-none opacity-40 lg:opacity-100">
-                <div className="relative w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] lg:w-[50vw] lg:h-[50vw] max-w-[800px] max-h-[800px] right-[-10vw] mix-blend-normal">
-                   <Image 
-                     src={product.img} 
-                     alt={product.name} 
-                     fill 
-                     className="object-contain" 
-                   />
+                <div className="flex flex-col gap-1 mt-6">
+                  <h3 className="font-display font-bold text-3xl uppercase tracking-tight">{work.title}</h3>
+                  <p className="text-lg text-dada-gray">{work.category}</p>
                 </div>
-              </div>
-              
-            </div>
-          </div>
-        ))}
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
