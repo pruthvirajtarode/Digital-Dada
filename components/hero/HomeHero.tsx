@@ -6,22 +6,22 @@ import { motion, AnimatePresence } from "framer-motion";
 const slides = [
   {
     id: 1,
-    video: "https://player.vimeo.com/progressive_redirect/playback/1151928962/rendition/1080p/file.mp4",
+    image: "/images/hero_1.png",
     text: "WE BUILD INTELLIGENT AI SYSTEMS"
   },
   {
     id: 2,
-    video: "https://player.vimeo.com/progressive_redirect/playback/1158780074/rendition/720p/file.mp4",
+    image: "/images/hero_2.png",
     text: "DESIGNED FOR ACCOUNTING FIRMS"
   },
   {
     id: 3,
-    video: "https://player.vimeo.com/progressive_redirect/playback/1159715146/rendition/1080p/file.mp4",
+    image: "/images/hero_3.png",
     text: "REPLACE REPETITIVE TASKS"
   },
   {
     id: 4,
-    video: "https://player.vimeo.com/progressive_redirect/playback/1160141933/rendition/720p/file.mp4",
+    image: "/images/hero_4.png",
     text: "SCALE WITHOUT LIMITS"
   }
 ];
@@ -57,29 +57,29 @@ export function HomeHero() {
   };
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 6000);
+    const timer = setInterval(nextSlide, 8000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <section className="relative w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center">
       
-      {/* Carousel Video Backgrounds */}
+      {/* Carousel Image Backgrounds with Ken Burns zoom effect */}
       <AnimatePresence mode="popLayout">
         <motion.div
           key={currentSlide}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "linear" }}
+          transition={{ duration: 1.2, ease: "linear" }}
           className="absolute inset-0"
         >
-          <video 
-            src={slides[currentSlide].video} 
-            autoPlay
-            loop
-            muted
-            playsInline
+          <motion.img 
+            src={slides[currentSlide].image} 
+            alt="Hero Background"
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 10, ease: "linear" }}
             className="w-full h-full object-cover object-center grayscale opacity-80"
           />
         </motion.div>

@@ -7,28 +7,28 @@ const works = [
   {
     title: "Relentless AI",
     category: "Executive Coach",
-    image: "https://cdn.sanity.io/images/ohqqe8j0/production/82288d8ab2b3062f3268b3e9d341fbdc608f0a3d-2785x2089.jpg?rect=85,68,2488,1860&q=100&fit=min&auto=format",
+    image: "/images/prod_relentless.png",
     link: "/products/relentless-ai",
     aspect: "aspect-[4/3]"
   },
   {
     title: "YourInboxHero",
     category: "Document Collection",
-    image: "https://cdn.sanity.io/images/ohqqe8j0/production/0397c50214d3f96ce5e1198b04206a68c81e8b0c-6720x4480.jpg?q=100&fit=min&auto=format",
+    image: "/images/prod_inbox.png",
     link: "/products/yourinboxhero",
     aspect: "aspect-[3/4]"
   },
   {
     title: "CollectAI",
     category: "Invoice Collections",
-    image: "https://cdn.sanity.io/images/ohqqe8j0/production/9a0e0d4b8f8ae2874cbac78ba9ebd11f4f0b6346-4448x3096.tif?q=100&fit=min&auto=format",
+    image: "/images/prod_collect.png",
     link: "/products/collectai",
     aspect: "aspect-[4/5]"
   },
   {
     title: "SOPBotAI",
     category: "Process Documentation",
-    image: "https://cdn.sanity.io/images/ohqqe8j0/production/d5a58229bf46702d8e754f87770a7be753cac85d-1200x630.png",
+    image: "/images/prod_sopbot.png",
     link: "/products/sopbotai",
     aspect: "aspect-[4/3]"
   }
