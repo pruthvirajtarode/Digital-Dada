@@ -6,18 +6,23 @@ import { motion, AnimatePresence } from "framer-motion";
 const slides = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop",
+    video: "https://player.vimeo.com/progressive_redirect/playback/1151928962/rendition/1080p/file.mp4",
     text: "WE BUILD INTELLIGENT AI SYSTEMS"
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop",
+    video: "https://player.vimeo.com/progressive_redirect/playback/1158780074/rendition/720p/file.mp4",
     text: "DESIGNED FOR ACCOUNTING FIRMS"
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=2000&auto=format&fit=crop",
+    video: "https://player.vimeo.com/progressive_redirect/playback/1159715146/rendition/1080p/file.mp4",
     text: "REPLACE REPETITIVE TASKS"
+  },
+  {
+    id: 4,
+    video: "https://player.vimeo.com/progressive_redirect/playback/1160141933/rendition/720p/file.mp4",
+    text: "SCALE WITHOUT LIMITS"
   }
 ];
 
@@ -34,26 +39,29 @@ export function HomeHero() {
 
   // Auto-advance
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 6000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <section className="relative w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center">
       
-      {/* Carousel Backgrounds */}
+      {/* Carousel Video Backgrounds */}
       <AnimatePresence mode="popLayout">
         <motion.div
           key={currentSlide}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "linear" }}
+          transition={{ duration: 0.8, ease: "linear" }}
           className="absolute inset-0"
         >
-          <img 
-            src={slides[currentSlide].image} 
-            alt="Hero Background" 
+          <video 
+            src={slides[currentSlide].video} 
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover object-center grayscale opacity-60"
           />
         </motion.div>
@@ -68,7 +76,7 @@ export function HomeHero() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4 }}
               className="font-display font-black text-[12vw] md:text-[8vw] uppercase tracking-tighter leading-[0.85] text-white"
             >
               {slides[currentSlide].text}

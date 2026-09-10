@@ -146,48 +146,54 @@ export default function AboutPage() {
         {/* Floating Images Container */}
         <div className="relative z-10 w-full h-[100vh] max-w-[1400px] mx-auto px-6">
           
-          {/* Staggered Placeholder Images mimicking the screenshot layout */}
+          {/* Staggered BBH Images mimicking the screenshot layout */}
           
           <motion.div 
             className="absolute top-[10%] left-[30%] w-64 h-40 bg-[#1a1a1a] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-50%"]) }}
           >
-            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1983</div>
+            <img src="https://cdn.sanity.io/images/ohqqe8j0/production/82288d8ab2b3062f3268b3e9d341fbdc608f0a3d-2785x2089.jpg?rect=85,68,2488,1860&q=100&fit=min&auto=format" alt="BBH 1983" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1983</div>
           </motion.div>
 
           <motion.div 
             className="absolute top-[5%] right-[25%] w-56 h-48 bg-[#111111] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-80%"]) }}
           >
-            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1983</div>
+            <img src="https://cdn.sanity.io/images/ohqqe8j0/production/0397c50214d3f96ce5e1198b04206a68c81e8b0c-6720x4480.jpg?q=100&fit=min&auto=format" alt="BBH 1983" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1983</div>
           </motion.div>
 
           <motion.div 
             className="absolute top-[15%] right-[5%] w-72 h-44 bg-[#222222] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-40%"]) }}
           >
-            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1985</div>
+            <video src="https://player.vimeo.com/progressive_redirect/playback/1151928962/rendition/540p/file.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1985</div>
           </motion.div>
 
           <motion.div 
             className="absolute bottom-[20%] left-[5%] w-72 h-48 bg-[#161616] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-90%"]) }}
           >
-             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1991</div>
+             <img src="https://cdn.sanity.io/images/ohqqe8j0/production/9a0e0d4b8f8ae2874cbac78ba9ebd11f4f0b6346-4448x3096.tif?q=100&fit=min&auto=format" alt="BBH 1991" className="w-full h-full object-cover" />
+             <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1991</div>
           </motion.div>
 
           <motion.div 
             className="absolute bottom-[30%] left-[35%] w-80 h-56 bg-[#1f1f1f] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-120%"]) }}
           >
-             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1991</div>
+             <video src="https://player.vimeo.com/progressive_redirect/playback/1158780074/rendition/540p/file.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+             <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1991</div>
           </motion.div>
 
           <motion.div 
             className="absolute bottom-[10%] right-[15%] w-60 h-64 bg-[#0a0a0a] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-70%"]) }}
           >
-             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1992</div>
+             <img src="https://cdn.sanity.io/images/ohqqe8j0/production/d5a58229bf46702d8e754f87770a7be753cac85d-1200x630.png" alt="BBH 1992" className="w-full h-full object-cover" />
+             <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1992</div>
           </motion.div>
 
         </div>

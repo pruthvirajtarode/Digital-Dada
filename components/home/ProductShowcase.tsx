@@ -7,28 +7,28 @@ const works = [
   {
     title: "Relentless AI",
     category: "Executive Coach",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
+    image: "https://cdn.sanity.io/images/ohqqe8j0/production/82288d8ab2b3062f3268b3e9d341fbdc608f0a3d-2785x2089.jpg?rect=85,68,2488,1860&q=100&fit=min&auto=format",
     link: "/products/relentless-ai",
     aspect: "aspect-[4/3]"
   },
   {
     title: "YourInboxHero",
     category: "Document Collection",
-    image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?q=80&w=1000&auto=format&fit=crop",
+    image: "https://cdn.sanity.io/images/ohqqe8j0/production/0397c50214d3f96ce5e1198b04206a68c81e8b0c-6720x4480.jpg?q=100&fit=min&auto=format",
     link: "/products/yourinboxhero",
     aspect: "aspect-[3/4]"
   },
   {
     title: "CollectAI",
     category: "Invoice Collections",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop",
+    image: "https://cdn.sanity.io/images/ohqqe8j0/production/9a0e0d4b8f8ae2874cbac78ba9ebd11f4f0b6346-4448x3096.tif?q=100&fit=min&auto=format",
     link: "/products/collectai",
     aspect: "aspect-[4/5]"
   },
   {
     title: "SOPBotAI",
     category: "Process Documentation",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop",
+    image: "https://cdn.sanity.io/images/ohqqe8j0/production/d5a58229bf46702d8e754f87770a7be753cac85d-1200x630.png",
     link: "/products/sopbotai",
     aspect: "aspect-[4/3]"
   }
@@ -49,7 +49,7 @@ export function ProductShowcase() {
           </Link>
         </div>
 
-        {/* Masonry-style Grid */}
+        {/* Masonry-style Grid using BBH precise imagery */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-24">
           {works.map((work, idx) => (
             <motion.div 
