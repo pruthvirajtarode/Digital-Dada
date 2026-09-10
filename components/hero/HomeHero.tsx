@@ -26,6 +26,25 @@ const slides = [
   }
 ];
 
+// Helper to render letter-by-letter blur hover effect (BBH signature effect)
+function BlurText({ text }: { text: string }) {
+  const chars = text.split("");
+  return (
+    <div className="flex flex-wrap justify-center">
+      {chars.map((char, index) => (
+        <span key={index} className="relative inline-block group mx-[-0.02em]">
+          <span className="relative transition-opacity duration-150 group-hover:opacity-0">{char === " " ? "\u00A0" : char}</span>
+          {char !== " " && (
+            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-75 opacity-0 blur-[2px] group-hover:opacity-100 group-hover:blur-none">
+              {char}
+            </span>
+          )}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function HomeHero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -37,7 +56,6 @@ export function HomeHero() {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  // Auto-advance
   useEffect(() => {
     const timer = setInterval(nextSlide, 6000);
     return () => clearInterval(timer);
@@ -62,40 +80,41 @@ export function HomeHero() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover object-center grayscale opacity-60"
+            className="w-full h-full object-cover object-center grayscale opacity-80"
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Massive Centered Text matching BBH font size and spacing */}
-      <div className="absolute inset-0 flex items-center justify-center px-6 md:px-24 pointer-events-none z-10">
-        <div className="text-center text-balance max-w-7xl mx-auto">
+      {/* Massive Centered Text mimicking BBH's blur typography exactly */}
+      <div className="absolute inset-0 flex items-center justify-center px-6 md:px-12 pointer-events-auto z-10 mix-blend-difference">
+        <div className="text-center text-balance w-full flex items-center justify-center">
           <AnimatePresence mode="wait">
-            <motion.h1
+            <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="font-display font-black text-[12vw] md:text-[8vw] uppercase tracking-tighter leading-[0.85] text-white"
+              className="font-display uppercase text-white leading-[0.8] cursor-default"
+              style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
             >
-              {slides[currentSlide].text}
-            </motion.h1>
+              <BlurText text={slides[currentSlide].text} />
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>
 
       {/* Invisible Click Areas for Next/Prev */}
-      <div className="absolute inset-0 flex z-20">
+      <div className="absolute inset-0 flex z-20 pointer-events-auto mix-blend-normal">
         <button 
           onClick={prevSlide}
-          className="w-1/2 h-full outline-none"
+          className="w-1/2 h-full outline-none bg-transparent"
           style={{ cursor: 'url(/images/arrow-left.svg) 12 12, pointer' }}
           aria-label="Previous Slide"
         />
         <button 
           onClick={nextSlide}
-          className="w-1/2 h-full outline-none"
+          className="w-1/2 h-full outline-none bg-transparent"
           style={{ cursor: 'url(/images/arrow-right.svg) 12 12, pointer' }}
           aria-label="Next Slide"
         />

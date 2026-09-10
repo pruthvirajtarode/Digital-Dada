@@ -12,8 +12,10 @@
   --color-background: var(--color-dada-black);
   --color-foreground: var(--color-dada-warm-white);
   
-  --font-sans: var(--font-inter), sans-serif;
-  --font-display: var(--font-space), sans-serif;
+  --font-sans: 'BBHSansBartle', sans-serif;
+  --font-display: 'BBHSansHegarty', sans-serif;
+  --font-hegarty: 'BBHSansHegarty', sans-serif;
+  --font-bartle: 'BBHSansBartle', sans-serif;
 }
 
 :root {

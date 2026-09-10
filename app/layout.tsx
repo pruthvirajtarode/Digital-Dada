@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, La_Belle_Aurore, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, La_Belle_Aurore } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +8,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space",
-  subsets: ["latin"],
-});
+// We will map the Tailwind classes in tailwind.config.ts to the BBH fonts
+// font-display will now be BBHSansHegarty and font-sans will be BBHSansBartle
 
 const laBelleAurore = La_Belle_Aurore({
   weight: "400",
@@ -60,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${laBelleAurore.variable} bg-dada-black text-dada-warm-white antialiased selection:bg-dada-accent selection:text-dada-black`}>
+    <html lang="en" className={`${inter.variable} ${laBelleAurore.variable} bg-dada-black text-dada-warm-white antialiased selection:bg-dada-accent selection:text-dada-black`}>
       <body className="min-h-screen flex flex-col relative">
         <div className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
         <GlobalCursor />
