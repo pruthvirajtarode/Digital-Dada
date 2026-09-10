@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { Headline } from "@/components/typography/Headline";
 import { Metadata } from "next";
 
 const productDetails: Record<string, any> = {
@@ -9,7 +8,7 @@ const productDetails: Record<string, any> = {
     label: "Your AI Executive Coach",
     description: "An intelligent executive-level advisor that helps business leaders analyze performance, identify opportunities, challenge assumptions, and make better decisions.",
     problem: "Executives make decisions based on delayed reporting and gut feelings.",
-    outcome: "Real-time analysis, continuous challenge of assumptions, and databacked decision making.",
+    outcome: "Real-time analysis, continuous challenge of assumptions, and data-backed decision making.",
   },
   "yourinboxhero": {
     name: "YOURINBOXHERO",
@@ -62,43 +61,61 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-dada-near-black">
-      <section className="pt-32 pb-24 px-6 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono tracking-widest text-dada-accent mb-6 uppercase">
+    <div className="flex flex-col min-h-screen bg-dada-off-white text-dada-black" data-cursor="view">
+      
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-24 pt-32 pb-24 border-b border-dada-black/10">
+        
+        <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <span className="font-mono text-sm tracking-widest text-dada-gray uppercase border border-dada-black/20 px-4 py-2 inline-block">
             {product.label}
-          </div>
-          
-          <Headline text={product.name} as="h1" className="text-5xl md:text-7xl font-bold mb-8 tracking-tight" />
-          
-          <p className="text-xl md:text-2xl text-dada-off-white/80 leading-relaxed mb-12">
+          </span>
+        </div>
+
+        <h1 className="font-display font-black text-[12vw] md:text-[10vw] uppercase tracking-tighter leading-[0.85] mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100 fill-mode-both">
+          {product.name}
+        </h1>
+        
+        <div className="max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 fill-mode-both">
+          <p className="text-2xl md:text-5xl font-light text-dada-black leading-[1.2] tracking-tight">
             {product.description}
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-white/5 p-8 border border-white/10 rounded-sm">
-              <h3 className="text-sm uppercase tracking-widest text-white/40 mb-4">The Problem</h3>
-              <p className="text-lg text-dada-off-white/80">{product.problem}</p>
-            </div>
-            <div className="bg-dada-accent/10 p-8 border border-dada-accent/20 rounded-sm">
-              <h3 className="text-sm uppercase tracking-widest text-dada-accent/60 mb-4">The Outcome</h3>
-              <p className="text-lg text-white">{product.outcome}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <Button href="/contact" size="lg" withArrow>
-              Deploy {product.name}
-            </Button>
-            <Button href="/products" variant="ghost">
-              View All Employees
-            </Button>
-          </div>
         </div>
-        
-        {/* Background glow */}
-        <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-dada-accent/5 blur-[120px] rounded-full pointer-events-none" />
+
       </section>
+
+      <section className="py-32 px-6 md:px-24">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-24">
+          
+          <div className="md:w-1/2 flex flex-col">
+            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter mb-8 text-dada-gray">
+              THE PROBLEM.
+            </h2>
+            <p className="text-xl md:text-3xl font-light leading-relaxed">
+              {product.problem}
+            </p>
+          </div>
+
+          <div className="md:w-1/2 flex flex-col">
+            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter mb-8 text-dada-black">
+              THE OUTCOME.
+            </h2>
+            <p className="text-xl md:text-3xl font-light leading-relaxed">
+              {product.outcome}
+            </p>
+          </div>
+
+        </div>
+
+        <div className="mt-32 max-w-7xl mx-auto flex flex-col sm:flex-row gap-8">
+          <Button href="/contact" className="bg-dada-black text-white hover:bg-dada-gray px-10 py-6 rounded-none text-sm font-bold tracking-widest uppercase border-0">
+            DEPLOY {product.name} →
+          </Button>
+          <Button href="/products" className="bg-transparent text-dada-black border border-dada-black hover:bg-dada-black hover:text-white px-10 py-6 rounded-none text-sm font-bold tracking-widest uppercase">
+            VIEW ALL EMPLOYEES
+          </Button>
+        </div>
+      </section>
+
     </div>
   );
 }

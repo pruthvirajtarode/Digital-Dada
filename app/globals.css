@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-dada-black: #0a0a0a;
-  --color-dada-near-black: #141414;
-  --color-dada-dark-gray: #242424;
+  --color-dada-black: #050505;
+  --color-dada-near-black: #111111;
+  --color-dada-dark-gray: #1a1a1a;
   --color-dada-gray: #888888;
-  --color-dada-off-white: #f4f4f4;
-  --color-dada-warm-white: #fcfcfc;
-  --color-dada-accent: #ccff00;
+  --color-dada-off-white: #e5e5e5;
+  --color-dada-warm-white: #ffffff;
+  --color-dada-accent: #ffffff; /* Changed accent to white for high contrast editorial look, but keep variable */
 
   --color-background: var(--color-dada-black);
   --color-foreground: var(--color-dada-warm-white);
@@ -17,13 +17,8 @@
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #fcfcfc;
-}
-
-@media (prefers-color-scheme: light) {
-  /* We will force dark mode for this premium website as per the prompt's implied aesthetics
-     but we leave the root defined just in case */
+  --background: #050505;
+  --foreground: #ffffff;
 }
 
 body {
@@ -35,11 +30,36 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-dada-accent);
-  color: var(--color-dada-black);
+  background-color: #333333; /* Darker selection for editorial feel */
+  color: #ffffff;
 }
 
 html {
   scroll-behavior: smooth;
   background-color: var(--background);
+}
+
+/* Base text sizing utilities for massive typography */
+.text-huge {
+  font-size: clamp(4rem, 12vw, 15rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+.text-display-lg {
+  font-size: clamp(3rem, 8vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.text-display {
+  font-size: clamp(2rem, 5vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* Image masking utilities */
+.mask-image-cover {
+  mask-image: linear-gradient(to bottom, black 0%, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
 }

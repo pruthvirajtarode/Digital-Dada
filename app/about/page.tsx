@@ -1,59 +1,65 @@
-import { Headline } from "@/components/typography/Headline";
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "About | Digital Dada",
-  description: "We’re building the infrastructure for the next generation of work.",
-};
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-dada-near-black">
-      <section className="pt-32 pb-24 px-6 relative">
-        <div className="max-w-4xl mx-auto">
-          <Headline text="We’re Not Building Another AI Tool." as="h1" className="text-5xl md:text-7xl font-bold mb-8 tracking-tight" />
-          <p className="text-2xl text-dada-accent mb-16 font-medium">
-            We’re building the infrastructure for the next generation of work.
+    <div className="flex flex-col min-h-screen bg-dada-black text-white" data-cursor="view">
+      
+      {/* Hero */}
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-24 pt-32 pb-24 border-b border-white/10">
+        <motion.h1 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-black text-huge uppercase tracking-tighter leading-[0.85] mb-12"
+        >
+          WE&apos;RE NOT BUILDING<br/>
+          ANOTHER AI TOOL.
+        </motion.h1>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl"
+        >
+          <p className="text-3xl md:text-5xl font-light text-dada-off-white leading-[1.2] tracking-tight">
+            We&apos;re building the infrastructure for the next generation of work.
           </p>
+        </motion.div>
+      </section>
+
+      {/* Philosophy Section - Editorial Composition */}
+      <section className="py-32 lg:py-48 px-6 md:px-24">
+        <div className="max-w-7xl mx-auto flex flex-col gap-32">
           
-          <div className="space-y-12 text-xl text-dada-off-white/80 leading-relaxed font-light">
-            <p>
-              Digital Dada was founded on a simple observation:<br />
-              <span className="font-medium text-white block mt-4">
-                Businesses spend enormous amounts of money paying people to perform repetitive work.
-              </span>
-            </p>
-            <p>
-              As AI becomes more capable, that equation is changing.
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12 border-b border-white/10 pb-32">
+            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter w-full md:w-1/3">
+              AI BUILT BY PEOPLE WHO UNDERSTAND BUSINESS.
+            </h2>
+            <div className="w-full md:w-1/2 flex flex-col gap-8 text-xl md:text-2xl font-light text-dada-gray leading-relaxed">
+              <p>Digital Dada was founded by entrepreneurs with 30 years of real-world business experience.</p>
+              <p>We don&apos;t start with: <span className="text-white italic">"Here's a cool AI technology. Where can we use it?"</span></p>
+              <p>We start with: <span className="text-white italic">"What is costing this business time, money and opportunity—and can technology eliminate it?"</span></p>
+            </div>
           </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12 pb-32">
+            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter w-full md:w-1/3">
+              THE FUTURE WON&apos;T BE ENTIRELY DIGITAL.
+            </h2>
+            <div className="w-full md:w-1/2 flex flex-col gap-8 text-xl md:text-2xl font-light text-dada-gray leading-relaxed">
+              <p>AI is beginning to move beyond screens.</p>
+              <p>Computer vision, robotics and physical AI are opening a new frontier where intelligent systems can interact with the physical world.</p>
+              <p>Digital Dada is exploring that frontier as well. Our long-term vision extends from digital employees to intelligent systems capable of coordinating digital and physical work.</p>
+              <p className="text-white mt-8 font-medium">The AI workforce is only the beginning.</p>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <section className="py-24 bg-dada-black border-t border-white/5 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-sm font-mono tracking-widest uppercase text-dada-accent mb-8">Our Mission</h2>
-          <p className="text-3xl md:text-4xl leading-tight font-medium text-white mb-24">
-            Our mission is to help businesses identify that work, intelligently automate it, and redeploy human talent toward higher-value activities.
-          </p>
-
-          <h2 className="text-sm font-mono tracking-widest uppercase text-dada-accent mb-12">Philosophy</h2>
-          <ul className="space-y-8">
-            {[
-              "Start with the business problem.",
-              "Use AI where it creates an advantage.",
-              "Keep humans where humans create the most value.",
-              "Measure the outcome.",
-              "Keep improving."
-            ].map((item, idx) => (
-              <li key={idx} className="flex gap-6 items-center text-xl text-dada-off-white/80 border-b border-white/10 pb-8 last:border-0">
-                <span className="text-dada-accent font-mono text-sm">0{idx + 1}</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </div>
   );
 }

@@ -38,30 +38,39 @@ export function GlobalCursor() {
 
   const variants = {
     default: { 
-      x: mousePosition.x - 6, 
-      y: mousePosition.y - 6, 
-      height: 12, 
-      width: 12,
-      backgroundColor: "#ccff00",
+      x: mousePosition.x - 4, 
+      y: mousePosition.y - 4, 
+      height: 8, 
+      width: 8,
+      backgroundColor: "#ffffff",
       mixBlendMode: "difference" as any,
       border: "0px solid transparent"
     },
     link: { 
-      x: mousePosition.x - 24, 
-      y: mousePosition.y - 24, 
-      height: 48, 
-      width: 48,
+      x: mousePosition.x - 16, 
+      y: mousePosition.y - 16, 
+      height: 32, 
+      width: 32,
       backgroundColor: "transparent",
-      border: "1px solid #ccff00",
-      mixBlendMode: "normal" as any
+      border: "1px solid rgba(255, 255, 255, 0.5)",
+      mixBlendMode: "difference" as any
     },
     explore: {
-      x: mousePosition.x - 40, 
-      y: mousePosition.y - 40, 
-      height: 80, 
-      width: 80,
-      backgroundColor: "#ccff00",
-      mixBlendMode: "normal" as any,
+      x: mousePosition.x - 32, 
+      y: mousePosition.y - 32, 
+      height: 64, 
+      width: 64,
+      backgroundColor: "#ffffff",
+      mixBlendMode: "difference" as any,
+      border: "0px solid transparent"
+    },
+    view: {
+      x: mousePosition.x - 32, 
+      y: mousePosition.y - 32, 
+      height: 64, 
+      width: 64,
+      backgroundColor: "#ffffff",
+      mixBlendMode: "difference" as any,
       border: "0px solid transparent"
     }
   };

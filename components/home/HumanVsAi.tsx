@@ -2,84 +2,77 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useSafeTransform } from "@/lib/useSafeTransform";
 
 export function HumanVsAi() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end start"],
   });
 
-  // Phase 1 (0 - 0.3): "YOUR EMPLOYEES SHOULDN'T BE DOING ROBOT WORK"
-  const phase1Opacity = useSafeTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
-  const phase1Scale = useSafeTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
-
-  // Phase 2 (0.3 - 0.6): Chaotic blinking tasks
-  const chaosOpacity = useSafeTransform(scrollYProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]);
-  
-  // Phase 2 inline task animations
-  const t1Y = useSafeTransform(scrollYProgress, [0.3, 0.6], ["-100vh", "100vh"]);
-  const t2Y = useSafeTransform(scrollYProgress, [0.3, 0.6], ["100vh", "-100vh"]);
-  const t3X = useSafeTransform(scrollYProgress, [0.3, 0.6], ["-100vw", "100vw"]);
-  const t4X = useSafeTransform(scrollYProgress, [0.3, 0.6], ["100vw", "-100vw"]);
-  const t5Scale = useSafeTransform(scrollYProgress, [0.3, 0.6], [0, 5]);
-  const t5Opacity = useSafeTransform(scrollYProgress, [0.3, 0.45, 0.6], [1, 0, 1]);
-  const t6Rotate = useSafeTransform(scrollYProgress, [0.3, 0.6], [0, 360]);
-  const t6Scale = useSafeTransform(scrollYProgress, [0.3, 0.6], [3, 0]);
-
-  // Phase 3 (0.7 - 1.0): Simplified massive text
-  const phase3Opacity = useSafeTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-  const phase3Scale = useSafeTransform(scrollYProgress, [0.7, 1.0], [0.9, 1]);
+  const listX = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
   return (
-    <section ref={containerRef} style={{ minHeight: "300vh" }} className="relative h-[300vh] bg-dada-near-black">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center p-6 bg-dada-black">
-        
-        {/* Phase 1 */}
-        <motion.div 
-          style={{ opacity: phase1Opacity, scale: phase1Scale }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-          <h2 className="text-4xl md:text-6xl lg:text-[6rem] font-bold tracking-tighter leading-[0.9] text-white text-center max-w-6xl">
-            YOUR EMPLOYEES<br/>
-            SHOULDN&apos;T BE DOING<br/>
-            <span className="text-dada-accent">ROBOT WORK.</span>
-          </h2>
-        </motion.div>
-
-        {/* Phase 2: Chaos */}
-        <motion.div 
-          style={{ opacity: chaosOpacity }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
-        >
-          <div className="relative w-full h-full flex items-center justify-center text-white/50 font-mono text-2xl md:text-5xl font-bold uppercase overflow-hidden">
-            <motion.span style={{ y: t1Y, x: "-20vw" }} className="absolute">sending reminders</motion.span>
-            <motion.span style={{ y: t2Y, x: "20vw" }} className="absolute">copying information</motion.span>
-            <motion.span style={{ x: t3X, y: "-20vh" }} className="absolute">chasing documents</motion.span>
-            <motion.span style={{ x: t4X, y: "20vh" }} className="absolute text-dada-accent">checking status</motion.span>
-            <motion.span style={{ scale: t5Scale, opacity: t5Opacity }} className="absolute">searching databases</motion.span>
-            <motion.span style={{ rotate: t6Rotate, scale: t6Scale }} className="absolute">following up</motion.span>
-          </div>
-        </motion.div>
-
-        {/* Phase 3: Final Resolution */}
-        <motion.div 
-          style={{ opacity: phase3Opacity, scale: phase3Scale }}
-          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none bg-dada-black"
-        >
-          <div className="text-center px-6">
-            <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-dada-off-white/60 mb-6 uppercase tracking-widest">
-              AI HANDLES THE REPETITION.
-            </h3>
-            <h2 className="text-5xl md:text-7xl lg:text-[8rem] font-black tracking-tighter text-white leading-[0.8] uppercase">
-              HUMANS HANDLE<br/>
-              <span className="text-dada-accent">THE JUDGMENT.</span>
-            </h2>
-          </div>
-        </motion.div>
-
+    <section ref={containerRef} className="bg-dada-near-black text-white py-32 overflow-hidden" data-cursor="explore">
+      <div className="max-w-7xl mx-auto px-6 mb-32">
+        <h2 className="font-display font-black text-4xl md:text-6xl lg:text-8xl uppercase tracking-tighter leading-none mb-12">
+          YOUR EMPLOYEES SHOULDN&apos;T<br/> BE DOING ROBOT WORK.
+        </h2>
+        <div className="max-w-3xl">
+          <p className="text-xl md:text-3xl font-light text-dada-off-white leading-relaxed mb-6">
+            Your best people should be solving problems, building relationships, making decisions and serving customers.
+          </p>
+          <p className="text-xl md:text-2xl font-light text-dada-gray leading-relaxed">
+            They shouldn&apos;t spend their days:
+          </p>
+        </div>
       </div>
+
+      {/* Scrolling List */}
+      <div className="relative w-[200vw] mb-48 flex items-center">
+        <motion.div style={{ x: listX }} className="flex gap-12 lg:gap-24 whitespace-nowrap pl-6">
+          {[
+            "sending reminders", "copying information", "chasing documents",
+            "checking status", "searching databases", "following up",
+            "updating systems", "repeating instructions"
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-12 lg:gap-24">
+              <span className="font-display font-black text-5xl md:text-7xl lg:text-9xl tracking-tighter text-dada-gray opacity-30 uppercase line-through decoration-white decoration-[4px] md:decoration-[8px]">
+                {item}
+              </span>
+              <span className="text-3xl md:text-5xl text-dada-accent">{"\u2192"}</span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Huge Statement */}
+      <div className="w-full px-6 flex flex-col items-center text-center">
+        <motion.h2 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-black text-huge uppercase tracking-tighter leading-[0.8] w-full"
+        >
+          <span className="block text-white">AI HANDLES</span>
+          <span className="block text-dada-gray">THE REPETITION.</span>
+        </motion.h2>
+        
+        <div className="h-24 md:h-48" /> {/* Spacer */}
+        
+        <motion.h2 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-black text-huge uppercase tracking-tighter leading-[0.8] w-full"
+        >
+          <span className="block text-white">HUMANS HANDLE</span>
+          <span className="block text-dada-gray">THE JUDGMENT.</span>
+        </motion.h2>
+      </div>
+      <div className="h-32" />
     </section>
   );
 }

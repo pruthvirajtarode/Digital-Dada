@@ -1,18 +1,14 @@
-import { Headline } from "@/components/typography/Headline";
-import { Button } from "@/components/ui/Button";
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Pricing | Digital Dada",
-  description: "Choose Your AI Workforce plan.",
-};
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
 
 const plans = [
   {
     name: "AI STARTER",
-    subtitle: "1 AI Employee",
-    description: "For firms ready to automate their first major workflow.",
-    features: [
+    employees: "1 AI Employee",
+    desc: "For firms ready to automate their first major workflow.",
+    includes: [
       "AI employee",
       "Workflow analysis",
       "System integration",
@@ -20,13 +16,13 @@ const plans = [
       "Monitoring",
       "Support"
     ],
-    cta: "Get Started"
+    cta: "GET STARTED"
   },
   {
     name: "AI GROWTH",
-    subtitle: "3 AI Employees",
-    description: "For firms ready to automate multiple operational functions.",
-    features: [
+    employees: "3 AI Employees",
+    desc: "For firms ready to automate multiple operational functions.",
+    includes: [
       "3 AI employees",
       "Workflow analysis",
       "Multiple integrations",
@@ -34,14 +30,13 @@ const plans = [
       "Monitoring",
       "Ongoing optimization"
     ],
-    cta: "Build Your Workforce",
-    highlighted: true
+    cta: "BUILD YOUR WORKFORCE"
   },
   {
     name: "AI ENTERPRISE",
-    subtitle: "Custom AI Workforce",
-    description: "For firms looking to fundamentally transform their operations.",
-    features: [
+    employees: "Custom AI Workforce",
+    desc: "For firms looking to fundamentally transform their operations.",
+    includes: [
       "Custom AI employees",
       "Multi-agent workflows",
       "Advanced integrations",
@@ -49,67 +44,63 @@ const plans = [
       "Human approval systems",
       "Ongoing AI optimization"
     ],
-    cta: "Talk to Us"
+    cta: "TALK TO US"
   }
 ];
 
 export default function PricingPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-dada-near-black">
-      <section className="pt-32 pb-24 px-6 text-center">
-        <div className="max-w-3xl mx-auto">
-          <Headline text="Choose Your AI Workforce" as="h1" className="text-5xl md:text-7xl font-bold mb-6 justify-center tracking-tight" />
-          <p className="text-xl text-dada-off-white/60">
-            No per-seat licenses. You are hiring digital employees, not buying software tools.
-          </p>
-        </div>
-      </section>
+    <div className="flex flex-col min-h-screen bg-dada-black text-white" data-cursor="view">
+      
+      <section className="pt-48 pb-24 px-6 md:px-24">
+        <motion.h1 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-black text-huge uppercase tracking-tighter leading-[0.85] mb-24 max-w-6xl"
+        >
+          CHOOSE YOUR<br/>
+          <span className="text-dada-gray">AI WORKFORCE.</span>
+        </motion.h1>
 
-      <section className="pb-32 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan) => (
-            <div 
-              key={plan.name} 
-              className={`p-8 md:p-12 border flex flex-col ${
-                plan.highlighted 
-                  ? "border-dada-accent bg-dada-black/80 relative" 
-                  : "border-white/10 bg-white/5"
-              } rounded-sm`}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border-t border-l border-white/10">
+          {plans.map((plan, i) => (
+            <motion.div 
+              key={plan.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col border-b border-r border-white/10 p-12 lg:p-16 hover:bg-white/5 transition-colors group"
             >
-              {plan.highlighted && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dada-accent text-dada-black text-xs font-bold tracking-widest px-4 py-1 uppercase">
-                  Most Popular
-                </div>
-              )}
-              <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
-              <div className="text-dada-accent font-mono text-sm tracking-widest uppercase mb-6">
-                {plan.subtitle}
-              </div>
-              <p className="text-dada-off-white/60 mb-8 flex-grow">
-                {plan.description}
+              <h2 className="font-display font-black text-3xl md:text-5xl uppercase tracking-tighter mb-4 text-white">
+                {plan.name}
+              </h2>
+              <span className="font-mono text-sm tracking-widest text-dada-gray uppercase mb-8 pb-8 border-b border-white/10 inline-block">
+                {plan.employees}
+              </span>
+              <p className="text-lg font-light text-dada-off-white leading-relaxed mb-16 h-20">
+                {plan.desc}
               </p>
               
-              <ul className="space-y-4 mb-12">
-                {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-sm text-dada-off-white/80">
-                    <span className="w-1.5 h-1.5 bg-dada-accent rounded-full" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <div className="mb-24 flex-1">
+                <span className="font-mono text-xs tracking-widest text-dada-gray uppercase block mb-8">Includes:</span>
+                <ul className="flex flex-col gap-4">
+                  {plan.includes.map(item => (
+                    <li key={item} className="text-white font-light text-lg flex items-start gap-4">
+                      <span className="text-dada-gray">→</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-              <Button 
-                href="/contact" 
-                variant={plan.highlighted ? "primary" : "outline"} 
-                className="w-full"
-                withArrow
-              >
-                {plan.cta}
+              <Button href="/contact" className="w-full bg-white text-black hover:bg-dada-gray hover:text-white px-8 py-5 rounded-none text-xs font-bold tracking-widest uppercase border-0">
+                {plan.cta} →
               </Button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
+
     </div>
   );
 }

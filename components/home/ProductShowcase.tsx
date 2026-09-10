@@ -2,140 +2,118 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useSafeTransform } from "@/lib/useSafeTransform";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 const products = [
   {
-    id: "01",
+    num: "01",
     name: "RELENTLESS AI",
-    label: "Your AI Executive Coach",
-    desc: "Provides real-time strategic insights, processes complex business data, and flags operational bottlenecks before they become critical.",
-    workflow: "DATA → DECISION → ACTION",
-    href: "/products/relentless-ai",
-    image: "/product-executive.png",
+    title: "YOUR AI\nEXECUTIVE\nCOACH.",
+    desc: "An intelligent executive-level advisor that helps business leaders analyze performance, identify opportunities, challenge assumptions, and make better decisions.",
+    img: "/product-executive.png",
+    bg: "bg-dada-near-black",
+    textColor: "text-white"
   },
   {
-    id: "02",
+    num: "02",
     name: "YOURINBOXHERO",
-    label: "Your AI Document Collection Employee",
-    desc: "Relentlessly chases clients for missing documents, verifies uploads, and organizes files automatically without human intervention.",
-    workflow: "REQUEST → CLIENT UPLOAD → VERIFIED",
-    href: "/products/yourinboxhero",
-    image: "/product-inbox.png",
+    title: "YOUR AI\nDOCUMENT\nCOLLECTION\nEMPLOYEE.",
+    desc: "A relentless AI employee that chases clients for missing files, automatically organizes uploads, and ensures your team has everything they need to start work.",
+    img: "/product-inbox.png",
+    bg: "bg-dada-black",
+    textColor: "text-white"
   },
   {
-    id: "03",
+    num: "03",
     name: "COLLECTAI",
-    label: "Your AI Collections Employee",
-    desc: "Manages accounts receivable with perfect consistency, sending perfectly timed follow-ups and processing payments autonomously.",
-    workflow: "INVOICE → REMINDER → PAYMENT",
-    href: "/products/collectai",
-    image: "/product-collect.png",
+    title: "YOUR AI\nCOLLECTIONS\nEMPLOYEE.",
+    desc: "An AI employee dedicated to following up on unpaid invoices, sending polite reminders, and managing the delicate process of getting your firm paid.",
+    img: "/product-collect.png",
+    bg: "bg-white",
+    textColor: "text-dada-black"
   },
   {
-    id: "04",
+    num: "04",
     name: "SOPBOTAI",
-    label: "Your AI Process Documentation Employee",
-    desc: "Observes how your top performers work and automatically generates flawless, continuously updated Standard Operating Procedures.",
-    workflow: "OBSERVATION → PROCESS → SOP",
-    href: "/products/sopbotai",
-    image: "/product-sop.png",
+    title: "YOUR AI\nPROCESS\nDOCUMENTATION\nEMPLOYEE.",
+    desc: "An intelligent system that watches how work gets done, writes step-by-step procedures, and instantly answers staff questions based on your firm's exact processes.",
+    img: "/product-sop.png",
+    bg: "bg-dada-near-black",
+    textColor: "text-white"
   },
   {
-    id: "05",
+    num: "05",
     name: "WORKFLOWIQ",
-    label: "Your AI Workflow Analyst",
-    desc: "Analyzes every step of your firm's internal operations to identify precise inefficiencies and recommend immediate automation opportunities.",
-    workflow: "BOTTLENECK → ANALYSIS → OPPORTUNITY",
-    href: "/products/workflowiq",
-    image: "/product-workflow.png",
-  },
+    title: "YOUR AI\nWORKFLOW\nANALYST.",
+    desc: "An analytical AI that examines your firm's operational data, identifies bottlenecks, measures efficiency, and recommends improvements to how work flows through your team.",
+    img: "/product-workflow.png",
+    bg: "bg-dada-black",
+    textColor: "text-white"
+  }
 ];
 
 export function ProductShowcase() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const x = useSafeTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
-
   return (
-    <section ref={containerRef} style={{ minHeight: "500vh" }} className="relative h-[500vh] bg-dada-near-black">
-      
-      {/* Intro Overlay Text */}
-      <div className="absolute top-10 left-6 lg:left-16 z-50 pointer-events-none">
-        <h2 className="text-2xl md:text-4xl font-display font-black tracking-widest uppercase text-white mix-blend-difference">
-          MEET YOUR AI WORKFORCE.
+    <section className="relative w-full">
+      {/* Intro Section */}
+      <div className="min-h-screen flex flex-col justify-center px-6 md:px-24 bg-dada-black text-white py-32">
+        <h2 className="font-display font-black text-huge uppercase tracking-tighter leading-none mb-12">
+          MEET YOUR AI<br/>
+          WORKFORCE
         </h2>
+        <p className="text-xl md:text-3xl font-light max-w-3xl leading-relaxed text-dada-gray mb-16">
+          Instead of giving you another collection of disconnected AI tools, Digital Dada gives your business specialized AI capabilities designed to work together.
+        </p>
       </div>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-dada-dark-gray/30 via-dada-black to-dada-black">
-        <motion.div style={{ x }} className="flex h-full w-[500vw]">
-          
-          {products.map((product, i) => (
-            <div key={product.id} className="relative w-[100vw] h-full flex flex-col lg:flex-row items-center justify-center p-6 lg:p-24 group">
+      {/* Sticky Stacking Product Sections */}
+      <div className="relative">
+        {products.map((product, i) => (
+          <div 
+            key={product.num}
+            className={`sticky top-0 h-screen w-full flex items-center overflow-hidden ${product.bg} ${product.textColor}`}
+            style={{ zIndex: i + 10 }}
+            data-cursor="view"
+          >
+            <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-24 w-full">
               
-              {/* Product Info (Left) */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center z-20 pr-0 lg:pr-12 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 lg:p-12 shadow-2xl transition-all duration-500 hover:border-white/20 hover:bg-white/10 relative overflow-hidden group/card">
-                {/* Subtle animated gradient background inside card */}
-                <div className="absolute inset-0 bg-gradient-to-br from-dada-accent/5 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                
-                <span className="text-dada-accent font-mono text-xl md:text-2xl tracking-widest mb-4 block relative z-10">
-                  {product.id}
-                </span>
-                <h3 className="text-5xl md:text-6xl lg:text-[5rem] font-display font-black tracking-tighter leading-none text-white mb-6 uppercase relative z-10">
-                  {product.name}
-                </h3>
-                <h4 className="text-2xl md:text-4xl text-dada-off-white/80 font-light mb-8">
-                  {product.label}
-                </h4>
-                <p className="text-lg md:text-xl text-dada-off-white/60 mb-12 max-w-xl leading-relaxed">
-                  {product.desc}
-                </p>
-
-                <div className="flex flex-col gap-8">
-                  <div className="inline-block px-4 py-2 border border-white/10 bg-white/5 backdrop-blur-md rounded-sm w-fit font-mono text-xs tracking-widest text-dada-accent uppercase">
-                    {product.workflow}
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full h-full py-24 gap-12 relative z-20">
+                {/* Left Side: Typography */}
+                <div className="flex-1 flex flex-col">
+                  <span className="font-mono text-sm tracking-widest mb-6 opacity-60">
+                    {product.num} — {product.name}
+                  </span>
+                  <h3 className="font-display font-black text-display uppercase tracking-tighter leading-[0.85] mb-8 whitespace-pre-line mix-blend-difference">
+                    {product.title}
+                  </h3>
+                  <p className="text-lg md:text-xl font-light max-w-md leading-relaxed opacity-80 mb-12 mix-blend-difference">
+                    {product.desc}
+                  </p>
+                  <div>
+                    <Button href={`/products#${product.name.toLowerCase()}`} className="bg-transparent border border-current hover:bg-current hover:text-dada-black mix-blend-difference px-8 py-4 rounded-none text-xs font-bold tracking-widest uppercase">
+                      LEARN MORE →
+                    </Button>
                   </div>
-                  
-                  <Link href={product.href} className="flex items-center gap-4 group/link w-fit" data-cursor="explore">
-                    <span className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover/link:bg-white group-hover/link:text-black transition-all">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                    </span>
-                    <span className="text-white font-bold tracking-widest uppercase text-sm group-hover/link:text-dada-accent transition-colors">
-                      Learn More
-                    </span>
-                  </Link>
                 </div>
               </div>
-
-              {/* Product Visual (Right) */}
-              <div className="w-full lg:w-1/2 h-[50vh] lg:h-full relative flex items-center justify-center pointer-events-none">
-                {/* Visual hover effect - slight scale and float */}
-                <div className="relative w-full h-full max-w-[800px] max-h-[800px] transition-transform duration-1000 group-hover:scale-105 group-hover:-translate-y-4">
-                  <Image 
-                    src={product.image} 
-                    alt={product.name} 
-                    fill 
-                    className="object-contain mix-blend-screen"
-                  />
-                </div>
-                {/* Hover Metadata */}
-                <div className="absolute bottom-10 right-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 font-mono text-xs text-dada-accent text-right tracking-widest uppercase hidden lg:block">
-                  <p>AI EMPLOYEE ACTIVE</p>
-                  <p>TASKS: {24 + i * 13}</p>
-                  <p>WORKFLOWS: 0{i + 3}</p>
+              
+              {/* Right Side / Background: Image */}
+              <div className="absolute inset-y-0 right-0 w-full lg:w-1/2 flex items-center justify-center lg:justify-end z-10 pointer-events-none opacity-40 lg:opacity-100">
+                <div className="relative w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] lg:w-[50vw] lg:h-[50vw] max-w-[800px] max-h-[800px] right-[-10vw] mix-blend-normal">
+                   <Image 
+                     src={product.img} 
+                     alt={product.name} 
+                     fill 
+                     className="object-contain" 
+                   />
                 </div>
               </div>
-
+              
             </div>
-          ))}
-
-        </motion.div>
+          </div>
+        ))}
       </div>
     </section>
   );

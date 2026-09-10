@@ -1,46 +1,55 @@
-import { Headline } from "@/components/typography/Headline";
-import { Button } from "@/components/ui/Button";
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Solutions | Digital Dada",
-  description: "Business problems solved by the AI Workforce.",
-};
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
 
 const solutions = [
-  "Document Collection",
-  "Invoice Collections",
-  "Client Onboarding",
-  "Workflow Automation",
-  "SOP Documentation",
-  "Knowledge Management",
-  "Executive Intelligence",
-  "Business Process Analysis"
+  { name: "Accounting Firms", desc: "Automate collections, onboarding, and SOPs.", link: "/accounting-firms" },
+  { name: "Executive Intelligence", desc: "Real-time AI advising for business leaders.", link: "/products/relentless-ai" },
+  { name: "Workflow Analysis", desc: "Discover bottlenecks and inefficiencies across your organization.", link: "/products/workflowiq" },
 ];
 
 export default function SolutionsPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-dada-near-black">
-      <section className="pt-32 pb-24 px-6 relative">
-        <div className="max-w-7xl mx-auto">
-          <Headline text="Solutions." as="h1" className="text-5xl md:text-7xl font-bold mb-8 tracking-tight" />
-          <p className="text-xl md:text-2xl text-dada-off-white/80 max-w-2xl mb-16 leading-relaxed">
-            We don’t sell generic AI services. We build intelligent systems that solve specific business problems.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solutions.map((solution, idx) => (
-              <div key={idx} className="p-8 border border-white/10 bg-dada-black group hover:border-dada-accent/30 transition-colors">
-                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-dada-accent transition-colors">{solution}</h3>
-                <div className="w-8 h-[1px] bg-white/20 group-hover:bg-dada-accent group-hover:w-16 transition-all duration-300 mb-6" />
-                <Button href="/contact" variant="ghost" className="px-0 hover:bg-transparent hover:text-white" withArrow>
-                  Explore Solution
+    <div className="flex flex-col min-h-screen bg-dada-black text-white" data-cursor="view">
+      
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-24 pt-32 pb-24">
+        <motion.h1 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-black text-[12vw] uppercase tracking-tighter leading-[0.85] mb-24"
+        >
+          SOLUTIONS.
+        </motion.h1>
+
+        <div className="max-w-7xl w-full border-t border-white/10">
+          {solutions.map((sol, i) => (
+            <motion.div 
+              key={sol.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col md:flex-row items-baseline justify-between py-12 border-b border-white/10 hover:bg-white/5 transition-colors group px-6"
+            >
+              <div className="flex flex-col md:w-2/3">
+                <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter mb-4 text-white">
+                  {sol.name}
+                </h2>
+                <p className="text-xl font-light text-dada-off-white leading-relaxed">
+                  {sol.desc}
+                </p>
+              </div>
+              <div className="mt-8 md:mt-0">
+                <Button href={sol.link} className="bg-white text-black hover:bg-dada-gray hover:text-white px-8 py-5 rounded-none text-xs font-bold tracking-widest uppercase border-0">
+                  VIEW SOLUTION →
                 </Button>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
       </section>
+
     </div>
   );
 }

@@ -1,40 +1,17 @@
 "use client";
 
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import { useSafeTransform } from "@/lib/useSafeTransform";
 import { useRef } from "react";
-import Image from "next/image";
+import { motion, useScroll } from "framer-motion";
+import { useSafeTransform } from "@/lib/useSafeTransform";
 
 const tasks = [
-  { text: "DOCUMENTS", top: "10%", left: "10%" },
-  { text: "FOLLOW-UPS", top: "20%", left: "70%" },
-  { text: "DATA ENTRY", top: "70%", left: "15%" },
-  { text: "STATUS CHECKS", top: "80%", left: "65%" },
-  { text: "EMAIL", top: "40%", left: "80%" },
-  { text: "REPORTING", top: "50%", left: "5%" },
+  { text: "Chasing clients for documents", top: "20%", left: "10%" },
+  { text: "Following up on unpaid invoices", top: "40%", left: "55%" },
+  { text: "Repeating the same instructions", top: "60%", left: "15%" },
+  { text: "Searching for information", top: "75%", left: "50%" },
+  { text: "Training employees on procedures", top: "25%", left: "60%" },
+  { text: "Managing repetitive workflows", top: "85%", left: "20%" },
 ];
-
-function TaskItem({ task, scrollYProgress, tasksOpacity, tasksScale }: { task: any, scrollYProgress: MotionValue<number>, tasksOpacity: MotionValue<number>, tasksScale: MotionValue<number> }) {
-  const xOffset = useSafeTransform(scrollYProgress, [0.5, 0.7], ["0px", task.left.startsWith("7") || task.left.startsWith("8") ? "-20vw" : "20vw"]);
-  const yOffset = useSafeTransform(scrollYProgress, [0.5, 0.7], ["0px", task.top.startsWith("1") || task.top.startsWith("2") ? "20vh" : "-20vh"]);
-  
-  return (
-    <motion.div
-      style={{ 
-        opacity: tasksOpacity, 
-        scale: tasksScale,
-        x: xOffset,
-        y: yOffset,
-        position: "absolute",
-        top: task.top,
-        left: task.left
-      }}
-      className="px-4 py-2 border border-white/20 bg-black/50 backdrop-blur-md text-white/80 font-mono text-xs md:text-sm tracking-widest rounded-sm"
-    >
-      {task.text}
-    </motion.div>
-  );
-}
 
 export function ProblemSection() {
   const containerRef = useRef(null);
@@ -43,58 +20,92 @@ export function ProblemSection() {
     offset: ["start start", "end end"],
   });
 
-  // Animation values
-  // Phase 1: Object enters (0 - 0.2)
-  const objectScale = useSafeTransform(scrollYProgress, [0, 0.2, 0.7, 0.9], [0, 1, 1, 1.5]);
-  const objectOpacity = useSafeTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  
-  // Phase 2: Tasks appear (0.3 - 0.5)
-  const tasksOpacity = useSafeTransform(scrollYProgress, [0.2, 0.3, 0.6, 0.7], [0, 1, 1, 0]);
-  const tasksScale = useSafeTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0.8, 1, 1, 0]);
-  
-  // Phase 3: Consolidation text appears (0.7 - 0.9)
-  const finalOpacity = useSafeTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-  const finalScale = useSafeTransform(scrollYProgress, [0.7, 0.9], [0.8, 1]);
+  // Intro Fades
+  const introOpacity = useSafeTransform(scrollYProgress, [0, 0.15, 0.25], [1, 1, 0]);
+  const introY = useSafeTransform(scrollYProgress, [0, 0.25], ["0%", "-50%"]);
+
+  // Tasks Fade In/Out
+  // Each task appears sequentially between 0.3 and 0.7, then all fade out at 0.75
+  const tasksOpacity = useSafeTransform(scrollYProgress, [0.25, 0.3, 0.7, 0.75], [0, 1, 1, 0]);
+
+  // Outro Fades
+  const outroOpacity = useSafeTransform(scrollYProgress, [0.75, 0.85, 1], [0, 1, 1]);
+  const outroScale = useSafeTransform(scrollYProgress, [0.75, 0.85, 1], [0.8, 1, 1]);
 
   return (
-    <section ref={containerRef} style={{ minHeight: "300vh" }} className="relative h-[300vh] bg-dada-near-black">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center p-6">
+    <section ref={containerRef} className="relative h-[400vh] bg-dada-off-white text-dada-black" data-cursor="view">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
         
-        {/* Headline */}
-        <div className="absolute top-20 left-6 lg:left-16 z-20">
-          <h2 className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-tighter leading-[0.9] text-white">
-            YOUR NEXT<br/>
-            EMPLOYEES<br/>
-            DON&apos;T NEED<br/>
-            <span className="text-dada-accent">DESKS.</span>
-          </h2>
-        </div>
-
-        {/* The AI Object */}
+        {/* Intro */}
         <motion.div 
-          style={{ scale: objectScale, opacity: objectOpacity }}
-          className="relative z-10 w-[50vw] h-[50vw] md:w-[30vw] md:h-[30vw] max-w-[500px] max-h-[500px]"
+          style={{ opacity: introOpacity, y: introY }}
+          className="absolute inset-0 flex flex-col justify-center px-6 md:px-24 w-full"
         >
-          <Image src="/product-executive.png" alt="AI Employee" fill className="object-contain mix-blend-screen" />
+          <h2 className="font-display font-black text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter leading-none mb-12 max-w-5xl">
+            YOUR NEXT EMPLOYEES DON&apos;T NEED DESKS.
+          </h2>
+          <p className="text-xl md:text-3xl font-light max-w-3xl leading-relaxed text-dada-gray">
+            Every accounting firm has work that consumes valuable employee time:
+          </p>
         </motion.div>
 
-        {/* The Repetitive Tasks */}
-        <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-          {tasks.map((task, i) => (
-            <TaskItem key={i} task={task} scrollYProgress={scrollYProgress} tasksOpacity={tasksOpacity} tasksScale={tasksScale} />
-          ))}
-        </div>
-
-        {/* Final Consolidated State */}
+        {/* Floating Tasks Container */}
         <motion.div 
-          style={{ opacity: finalOpacity, scale: finalScale }}
-          className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none mix-blend-difference"
+          style={{ opacity: tasksOpacity }}
+          className="absolute inset-0 z-10 pointer-events-none"
         >
-          <h3 className="text-[10vw] md:text-[8vw] font-bold tracking-tighter leading-none text-white text-center">
-            ONE<br/>
-            INTELLIGENT<br/>
-            SYSTEM
-          </h3>
+          {tasks.map((task, idx) => {
+            // Calculate individual task timing based on idx
+            const startFadeIn = 0.3 + (idx * 0.05);
+            const endFadeIn = startFadeIn + 0.05;
+            
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const itemOpacity = useSafeTransform(
+              scrollYProgress, 
+              [startFadeIn, endFadeIn], 
+              [0, 1]
+            );
+            
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const itemY = useSafeTransform(
+              scrollYProgress, 
+              [startFadeIn, endFadeIn], 
+              ["50px", "0px"]
+            );
+
+            return (
+              <motion.div
+                key={idx}
+                style={{ 
+                  opacity: itemOpacity,
+                  y: itemY,
+                  top: task.top,
+                  left: task.left
+                }}
+                className="absolute font-display font-black text-3xl md:text-5xl lg:text-7xl uppercase tracking-tighter text-dada-black max-w-lg leading-[0.9]"
+              >
+                {task.text}
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Outro */}
+        <motion.div 
+          style={{ opacity: outroOpacity, scale: outroScale }}
+          className="absolute inset-0 z-20 flex flex-col justify-center items-center px-6 md:px-24 w-full text-center bg-dada-black text-white"
+        >
+          <p className="text-xl md:text-2xl font-light text-dada-gray mb-12">
+            That work doesn&apos;t necessarily need another employee.
+          </p>
+          <h2 className="font-display font-black text-huge uppercase tracking-tighter leading-[0.8] mb-12">
+            IT MAY NEED<br/>
+            <span className="text-dada-gray">AN AI</span><br/>
+            EMPLOYEE.
+          </h2>
+          <p className="text-sm md:text-base font-sans max-w-2xl text-dada-gray leading-relaxed uppercase tracking-widest">
+            Digital Dada identifies the work, builds the AI system, connects it to your existing technology, and puts it to work.
+          </p>
         </motion.div>
 
       </div>
