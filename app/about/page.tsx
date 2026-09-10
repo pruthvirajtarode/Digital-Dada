@@ -1,61 +1,194 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function AboutPage() {
+  const containerRef = useRef(null);
+  
+  // Parallax for the "ZIG ZAG" section
+  const { scrollYProgress: zigZagProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+  
+  const bgTextY = useTransform(zigZagProgress, [0, 1], ["-20%", "20%"]);
+  
+  // Parallax for floating gallery
+  const { scrollYProgress: galleryProgress } = useScroll();
+
   return (
-    <div className="flex flex-col min-h-screen bg-dada-black text-white" data-cursor="view">
+    <div className="flex flex-col min-h-screen bg-[#0f0f0f] text-white" data-cursor="view">
       
-      {/* Hero */}
-      <section className="min-h-screen flex flex-col justify-center px-6 md:px-24 pt-32 pb-24 border-b border-white/10">
-        <motion.h1 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-black text-huge uppercase tracking-tighter leading-[0.85] mb-12"
-        >
-          WE&apos;RE NOT BUILDING<br/>
-          ANOTHER AI TOOL.
-        </motion.h1>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl"
-        >
-          <p className="text-3xl md:text-5xl font-light text-dada-off-white leading-[1.2] tracking-tight">
-            We&apos;re building the infrastructure for the next generation of work.
-          </p>
-        </motion.div>
+      {/* 1. Zig Zag 3D Intersecting Text Section */}
+      <section ref={containerRef} className="relative h-[200vh] bg-[#0f0f0f] w-full overflow-hidden flex flex-col justify-center">
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+          
+          {/* Background Text Layer */}
+          <motion.div 
+            style={{ y: bgTextY }}
+            className="absolute inset-0 flex flex-col justify-center items-center z-0 whitespace-nowrap text-center select-none"
+          >
+            <h2 className="font-display font-black text-[22vw] uppercase leading-[0.85] tracking-tighter mix-blend-normal opacity-90">
+              WHEN<br/>
+              <span className="text-[18vw]">THE WORLD</span><br/>
+              ZIGS,<br/>
+              <span className="text-[20vw]">ZAG</span>
+            </h2>
+          </motion.div>
+
+          {/* Center 3D Object / Image Layer */}
+          <div className="relative z-10 w-[70vw] h-[70vw] md:w-[40vw] md:h-[40vw] max-w-[600px] max-h-[600px] mix-blend-normal">
+            {/* We use a placeholder DIV styled to look like an intersecting object for layout proofing */}
+            <div className="w-full h-full bg-gradient-to-tr from-[#3f2a1b] to-[#8a5b3a] rounded-full shadow-[0_0_100px_rgba(0,0,0,0.8)] rotate-12 flex items-center justify-center border-[8px] border-[#22150d] overflow-hidden relative">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 to-transparent"></div>
+            </div>
+          </div>
+
+          {/* Foreground Text Layer (Intersecting) */}
+          <motion.div 
+            style={{ y: bgTextY }}
+            className="absolute inset-0 flex flex-col justify-center items-center z-20 whitespace-nowrap text-center select-none pointer-events-none"
+            style={{ clipPath: 'polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%)' }} // Crops the text so it appears to go behind and in front
+          >
+            <h2 className="font-display font-black text-[22vw] uppercase leading-[0.85] tracking-tighter mix-blend-normal">
+              WHEN<br/>
+              <span className="text-[18vw]">THE WORLD</span><br/>
+              ZIGS,<br/>
+              <span className="text-[20vw]">ZAG</span>
+            </h2>
+          </motion.div>
+
+        </div>
       </section>
 
-      {/* Philosophy Section - Editorial Composition */}
-      <section className="py-32 lg:py-48 px-6 md:px-24">
-        <div className="max-w-7xl mx-auto flex flex-col gap-32">
-          
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12 border-b border-white/10 pb-32">
-            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter w-full md:w-1/3">
-              AI BUILT BY PEOPLE WHO UNDERSTAND BUSINESS.
-            </h2>
-            <div className="w-full md:w-1/2 flex flex-col gap-8 text-xl md:text-2xl font-light text-dada-gray leading-relaxed">
-              <p>Digital Dada was founded by entrepreneurs with 30 years of real-world business experience.</p>
-              <p>We don&apos;t start with: <span className="text-white italic">"Here's a cool AI technology. Where can we use it?"</span></p>
-              <p>We start with: <span className="text-white italic">"What is costing this business time, money and opportunity—and can technology eliminate it?"</span></p>
-            </div>
-          </div>
+      {/* 2. Massive Centered Hero Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 md:px-24 bg-[#0f0f0f] pt-32 pb-32">
+        <div className="max-w-[90vw] lg:max-w-7xl mx-auto text-center flex flex-col items-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display font-black text-[12vw] md:text-[10vw] uppercase tracking-tighter leading-[0.85] text-white"
+          >
+            WE'RE NOT<br/>
+            BUILDING<br/>
+            ANOTHER AI<br/>
+            TOOL.
+          </motion.h1>
+        </div>
+      </section>
 
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12 pb-32">
-            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter w-full md:w-1/3">
-              THE FUTURE WON&apos;T BE ENTIRELY DIGITAL.
-            </h2>
-            <div className="w-full md:w-1/2 flex flex-col gap-8 text-xl md:text-2xl font-light text-dada-gray leading-relaxed">
-              <p>AI is beginning to move beyond screens.</p>
-              <p>Computer vision, robotics and physical AI are opening a new frontier where intelligent systems can interact with the physical world.</p>
-              <p>Digital Dada is exploring that frontier as well. Our long-term vision extends from digital employees to intelligent systems capable of coordinating digital and physical work.</p>
-              <p className="text-white mt-8 font-medium">The AI workforce is only the beginning.</p>
-            </div>
-          </div>
+      {/* 3. Centered Stacking Philosophy Text */}
+      <section className="py-32 bg-[#0f0f0f] px-6 md:px-24">
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center gap-16">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-2"
+          >
+            <h3 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-white">Start with the business problem.</h3>
+            <h3 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-white">Use AI where it creates an advantage.</h3>
+            <h3 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-white">Keep humans where humans create value.</h3>
+            <h3 className="font-display font-bold text-3xl md:text-5xl tracking-tight text-white">Measure the outcome.</h3>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-2"
+          >
+            <p className="text-2xl md:text-4xl font-display font-bold text-white/90">We build, rebuild and reinvent workflows.</p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-2"
+          >
+            <p className="text-2xl md:text-4xl font-display font-bold text-white/80 max-w-3xl leading-snug">
+              Document Collection. Invoice Collections. Executive Intelligence. Process Documentation. Everything in-between.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-2 mt-8"
+          >
+            <p className="text-2xl md:text-4xl font-display font-bold text-white">Every workflow. Same answer.</p>
+            <p className="text-2xl md:text-4xl font-display font-bold text-white">We find your efficiency.</p>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* 4. Floating Image Gallery with Massive Background Text */}
+      <section className="relative min-h-[150vh] bg-[#0f0f0f] py-48 overflow-hidden w-full">
+        
+        {/* Background Massive Text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <motion.h2 
+            className="font-display font-black text-[18vw] uppercase leading-[0.8] tracking-tighter text-white/90 text-center whitespace-nowrap"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "30%"]) }}
+          >
+            THE AI<br/>
+            WORKFORCE
+          </motion.h2>
+        </div>
+
+        {/* Floating Images Container */}
+        <div className="relative z-10 w-full h-[100vh] max-w-[1400px] mx-auto px-6">
+          
+          {/* Staggered Placeholder Images mimicking the screenshot layout */}
+          
+          <motion.div 
+            className="absolute top-[10%] left-[30%] w-64 h-40 bg-[#1a1a1a] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-50%"]) }}
+          >
+            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1983</div>
+          </motion.div>
+
+          <motion.div 
+            className="absolute top-[5%] right-[25%] w-56 h-48 bg-[#111111] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-80%"]) }}
+          >
+            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1983</div>
+          </motion.div>
+
+          <motion.div 
+            className="absolute top-[15%] right-[5%] w-72 h-44 bg-[#222222] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-40%"]) }}
+          >
+            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1985</div>
+          </motion.div>
+
+          <motion.div 
+            className="absolute bottom-[20%] left-[5%] w-72 h-48 bg-[#161616] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-90%"]) }}
+          >
+             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1991</div>
+          </motion.div>
+
+          <motion.div 
+            className="absolute bottom-[30%] left-[35%] w-80 h-56 bg-[#1f1f1f] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-120%"]) }}
+          >
+             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1991</div>
+          </motion.div>
+
+          <motion.div 
+            className="absolute bottom-[10%] right-[15%] w-60 h-64 bg-[#0a0a0a] flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 border border-white/10"
+            style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-70%"]) }}
+          >
+             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/20 text-xs font-mono">1992</div>
+          </motion.div>
 
         </div>
       </section>
