@@ -168,7 +168,7 @@ export default function AboutPage() {
             className="absolute top-[15%] right-[5%] w-72 h-44 bg-[#222222] flex items-center justify-center overflow-hidden transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-40%"]) }}
           >
-            <video src="https://player.vimeo.com/progressive_redirect/playback/1151928962/rendition/540p/file.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+            <img src="/images/hero_1.png" alt="1985" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1985</div>
           </motion.div>
 
@@ -184,7 +184,7 @@ export default function AboutPage() {
             className="absolute bottom-[30%] left-[35%] w-80 h-56 bg-[#1f1f1f] flex items-center justify-center overflow-hidden transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-120%"]) }}
           >
-             <video src="https://player.vimeo.com/progressive_redirect/playback/1158780074/rendition/540p/file.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+             <img src="/images/hero_3.png" alt="1991" className="w-full h-full object-cover" />
              <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1991</div>
           </motion.div>
 
@@ -192,7 +192,7 @@ export default function AboutPage() {
             className="absolute bottom-[10%] right-[15%] w-60 h-64 bg-[#0a0a0a] flex items-center justify-center overflow-hidden transition-all duration-500 border border-white/10"
             style={{ y: useTransform(galleryProgress, [0, 1], ["0%", "-70%"]) }}
           >
-             <img src="https://cdn.sanity.io/images/ohqqe8j0/production/d5a58229bf46702d8e754f87770a7be753cac85d-1200x630.png" alt="BBH 1992" className="w-full h-full object-cover" />
+             <img src="/images/hero_4.png" alt="BBH 1992" className="w-full h-full object-cover" />
              <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white/80 text-xs font-mono opacity-0 hover:opacity-100 transition-opacity">1992</div>
           </motion.div>
 
