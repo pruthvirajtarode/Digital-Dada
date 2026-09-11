@@ -80,7 +80,7 @@ export function HomeHero() {
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 10, ease: "linear" }}
-            className="w-full h-full object-cover object-center grayscale opacity-80"
+            className="w-full h-full object-cover object-center opacity-80"
           />
         </motion.div>
       </AnimatePresence>

@@ -65,7 +65,7 @@ export function ProductShowcase() {
                   <img 
                     src={work.image} 
                     alt={work.title}
-                    className="w-full h-full object-cover grayscale opacity-80 group-hover:scale-[1.03] group-hover:opacity-100 group-hover:-rotate-[1deg] transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover opacity-80 group-hover:scale-[1.03] group-hover:opacity-100 group-hover:-rotate-[1deg] transition-all duration-700 ease-out"
                   />
                 </div>
                 <div className="flex flex-col gap-1 mt-6">
